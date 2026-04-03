@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact a licensed private investigator in Metairie, LA for a free, confidential consultation. Call (504) 833-3716 or submit the online form for same-day response.">
+  <title>Contact a Private Investigator in Metairie, LA | Free Consultation</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============================================
+     STICKY HEADER
+     ============================================ -->
+<header class="sticky-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="17" cy="17" r="12" stroke="#c49a3c" stroke-width="3"/>
+          <line x1="26" y1="26" x2="36" y2="36" stroke="#c49a3c" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="17" cy="17" r="5" fill="#c49a3c" opacity="0.3"/>
+          <circle cx="17" cy="17" r="2" fill="#c49a3c"/>
+        </svg>
+      </span>
+      PI Metairie
+    </a>
+
+    <nav class="nav-desktop">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="articles.html">Articles</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="tel:+15048333716" class="header-phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (504) 833-3716
+      </a>
+      <a href="contact.html" class="btn btn-accent btn-sm">Free Consultation</a>
+      <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="articles.html" onclick="closeMenu()">Articles</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+  <a href="tel:+15048333716" class="btn btn-accent btn-block" onclick="closeMenu()">Call (504) 833-3716</a>
+  <a href="#contact-form" class="btn btn-outline btn-block" onclick="closeMenu()">Request Consultation</a>
+</nav>
+
+<!-- ============================================
+     PAGE HERO
+     ============================================ -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Get a Free, Confidential Consultation</h1>
+    <p>Reach out to discuss your case with a licensed private investigator serving Metairie and the surrounding areas.</p>
+  </div>
+</section>
+
+<!-- ============================================
+     CONTACT GRID SECTION
+     ============================================ -->
+<section class="section" id="contact-form">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT COLUMN: Contact Form -->
+      <div class="animate-on-scroll">
+        <div class="hero-form-card" style="opacity: 1; animation: none;">
+          <h2 class="form-title">Send a Message</h2>
+          <p class="form-subtitle">Fill out the form below and a licensed investigator will respond promptly. All inquiries are kept strictly confidential.</p>
+
+          <form action="https://formspree.io/f/xkopjyve" method="POST" id="contactForm">
+            <div class="form-group">
+              <label for="fullName">Full Name *</label>
+              <input type="text" id="fullName" name="name" placeholder="Your full name" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="(504) 555-0000">
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="caseType">Case Type *</label>
+              <select id="caseType" name="case_type" required>
+                <option value="" disabled selected>Select a case type</option>
+                <option value="Infidelity/Cheating Spouse">Infidelity/Cheating Spouse</option>
+                <option value="Child Custody">Child Custody</option>
+                <option value="Background Check">Background Check</option>
+                <option value="Skip Trace/Missing Person">Skip Trace/Missing Person</option>
+                <option value="Insurance Fraud">Insurance Fraud</option>
+                <option value="Asset Investigation">Asset Investigation</option>
+                <option value="Process Serving">Process Serving</option>
+                <option value="Digital/OSINT Investigation">Digital/OSINT Investigation</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message / Case Details *</label>
+              <textarea id="message" name="message" placeholder="Briefly describe your situation and what you need help with..." rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-accent btn-lg btn-block">Submit Consultation Request</button>
+
+            <div class="form-trust">
+              <span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                100% Confidential
+              </span>
+              <span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                No Obligation
+              </span>
+              <span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Fast Response
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Contact Info & Areas Served -->
+      <div>
+        <!-- Phone Card -->
+        <div class="info-card info-card-accent animate-on-scroll" style="margin-bottom: 20px;">
+          <div class="contact-info-item" style="margin-bottom: 0;">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <h4>Call Directly</h4>
+              <p><a href="tel:+15048333716">(504) 833-3716</a></p>
+              <p style="font-size: 0.82rem; color: var(--gray-500); margin-top: 4px;">Speak with a licensed investigator today.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Address Card -->
+        <div class="info-card animate-on-scroll delay-1" style="margin-bottom: 20px;">
+          <div class="contact-info-item" style="margin-bottom: 0;">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <h4>Office Location</h4>
+              <p>One Galleria Blvd., Suite 1900<br>Metairie, LA 70001</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hours Card -->
+        <div class="info-card animate-on-scroll delay-2" style="margin-bottom: 32px;">
+          <div class="contact-info-item" style="margin-bottom: 0;">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <h4>Availability</h4>
+              <p>Available evenings and weekends. Same-day consultations when possible.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Areas Served -->
+        <div class="animate-on-scroll delay-3">
+          <h3 style="font-size: 1.15rem; margin-bottom: 16px;">Areas Served</h3>
+          <div class="areas-grid">
+            <span class="area-tag">Metairie</span>
+            <span class="area-tag">Old Metairie</span>
+            <span class="area-tag">Bucktown</span>
+            <span class="area-tag">Metairie Lakefront</span>
+            <span class="area-tag">Airline Park</span>
+            <span class="area-tag">Bonnabel Place</span>
+            <span class="area-tag">Country Club Estates</span>
+            <span class="area-tag">River Ridge</span>
+            <span class="area-tag">Elmwood</span>
+            <span class="area-tag">Kenner</span>
+            <span class="area-tag">Harahan</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- No Obligation Note -->
+    <div class="text-center animate-on-scroll" style="margin-top: 48px;">
+      <div class="info-card info-card-accent" style="max-width: 700px; margin: 0 auto; padding: 28px 32px;">
+        <p style="font-size: 1.05rem; color: var(--primary); font-weight: 600; margin-bottom: 4px;">The first consultation is free and confidential.</p>
+        <p style="font-size: 0.95rem; color: var(--gray-500); margin: 0;">There is no obligation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CTA SECTION
+     ============================================ -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="animate-on-scroll">Ready to Get Answers?</h2>
+    <p class="animate-on-scroll delay-1">A licensed private investigator in Metairie is available to discuss your case today. The consultation is free and completely confidential.</p>
+    <div class="cta-buttons animate-on-scroll delay-2">
+      <a href="tel:+15048333716" class="btn btn-accent btn-lg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call (504) 833-3716
+      </a>
+      <a href="#contact-form" class="btn btn-outline btn-lg" style="border-color: var(--white); color: var(--white);">
+        Send a Message
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>About This Site</h4>
+        <p>Connecting residents of Metairie and Jefferson Parish with licensed, experienced private investigators for confidential investigative services.</p>
+        <p>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle; margin-right: 4px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          One Galleria Blvd., Suite 1900, Metairie, LA 70001
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="articles.html">Articles</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="services.html">Infidelity Investigations</a>
+        <a href="services.html">Child Custody</a>
+        <a href="services.html">Background Checks</a>
+        <a href="services.html">Skip Tracing</a>
+        <a href="services.html">Insurance Fraud</a>
+        <a href="services.html">Process Serving</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+15048333716">(504) 833-3716</a>
+        <p>Available evenings and weekends</p>
+        <p>Metairie, Louisiana</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 privateinvestigatormetairie.com. All rights reserved. This is a referral website. By contacting this site, you may be connected with a licensed private investigator.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+// --- Mobile Menu ---
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+
+menuToggle.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+});
+
+function closeMenu() {
+  mobileMenu.classList.remove('open');
+}
+
+// --- Header Scroll Effect ---
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// --- Scroll Animations (Intersection Observer) ---
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+// --- Smooth scroll for anchor links ---
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const headerHeight = document.querySelector('.sticky-header').offsetHeight;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
