@@ -6,7 +6,7 @@ export const siteConfig = {
   phoneDisplay: '(504) 833-3716',
   address: 'One Galleria Blvd., Suite 1900, Metairie, LA 70001',
   email: 'info@privateinvestigatormetairie.com',
-  formEndpoint: 'https://formspree.io/f/xpzgwovk',
+  formEndpoint: 'https://formspree.io/f/xkopjyve',
   kwPrimary: 'Private Investigator Metairie',
   locationFull: 'Metairie, Louisiana',
   locationCity: 'Metairie',
