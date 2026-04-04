@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LeadCaptureForm from '../../components/LeadCaptureForm.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+export function getStaticPaths() {
+  const cities = [
+    {
+      slug: 'metairie',
+      name: 'Metairie',
+      state: 'LA',
+      county: 'Jefferson Parish',
+      intro: 'Metairie is the largest unincorporated community in Louisiana and the hub of Jefferson Parish. As the most densely populated area outside New Orleans, Metairie requires experienced, locally-knowledgeable private investigators who understand the neighborhoods, court systems, and local legal landscape.',
+      neighborhoods: ['Old Metairie', 'Lake Vista', 'Fat City', 'Bucktown', 'Lakewood', 'Villa Oaks', 'Causeway Corridor', 'Bonnabel'],
+      landmarks: ['Lakeside Shopping Center', 'One Galleria Blvd', 'Jefferson Parish Courthouse', 'North Metairie', 'Metairie Road'],
+      services: 'Our referred Metairie PIs handle all case types including surveillance of Jefferson Parish residents, infidelity investigations, child custody cases heard in the 24th Judicial District Court, background checks, skip tracing, and corporate investigations for Metairie businesses.',
+      relatedPosts: [
+        { label: 'How to Hire a PI in Metairie', href: '/blog/how-to-hire-private-investigator-metairie' },
+        { label: 'PI Cost in New Orleans Area', href: '/blog/private-investigator-cost-new-orleans' },
+        { label: 'Background Checks in Metairie', href: '/blog/background-check-metairie' },
+      ],
+      image: '/images/metairie-neighborhood.jpg',
+    },
+    {
+      slug: 'kenner',
+      name: 'Kenner',
+      state: 'LA',
+      county: 'Jefferson Parish',
+      intro: 'Kenner is a major city in Jefferson Parish and home to Louis Armstrong New Orleans International Airport. The city sits between Metairie and St. Charles Parish, requiring investigators with knowledge of both Jefferson and St. Charles Parish jurisdictions.',
+      neighborhoods: ['Laketown', 'Chateau Estates', 'West Esplanade', 'Rivertown District', 'Lake Kenner', 'Williams Blvd Corridor'],
+      landmarks: ['Louis Armstrong International Airport', 'Kenner City Park', 'Rivertown', 'Lake Pontchartrain waterfront'],
+      services: 'Kenner investigations frequently involve surveillance near the airport corridor, cases involving travel documentation, background checks for airport-adjacent businesses, and domestic investigations in Kenner residential areas. Our referred PIs know Kenner\'s layout and can conduct discreet surveillance throughout the city.',
+      relatedPosts: [
+        { label: 'Surveillance Laws in Louisiana', href: '/blog/surveillance-laws-louisiana-pi' },
+        { label: 'Skip Tracing in Metairie', href: '/blog/skip-tracing-metairie-louisiana' },
+        { label: 'Verify a PI License in Louisiana', href: '/blog/verify-pi-license-louisiana' },
+      ],
+      image: '/images/surveillance-binoculars.jpg',
+    },
+    {
+      slug: 'harahan',
+      name: 'Harahan',
+      state: 'LA',
+      county: 'Jefferson Parish',
+      intro: 'Harahan is a quiet residential city in Jefferson Parish, bordered by River Ridge, Jefferson, and Elmwood. Its tree-lined streets and suburban character make it an ideal community — and a common location for domestic investigation cases.',
+      neighborhoods: ['River Ridge', 'Elm Grove', 'Jefferson Heights', 'Harahan Riverfront', 'Westside Estates'],
+      landmarks: ['Jefferson Parish Line', 'Harahan City Hall', 'River Ridge Community', 'Elmwood Business District'],
+      services: 'Harahan investigations commonly involve infidelity and domestic surveillance, child custody cases in Jefferson Parish courts, and background checks for local residents. Our referred PIs are experienced in navigating the residential streets of Harahan and River Ridge discreetly and professionally.',
+      relatedPosts: [
+        { label: 'What to Expect in a Cheating Spouse Investigation', href: '/blog/cheating-spouse-investigation-what-to-expect' },
+        { label: 'Child Custody Investigation in Jefferson Parish', href: '/blog/child-custody-investigation-jefferson-parish' },
+        { label: 'Louisiana One-Party Consent Recording', href: '/blog/louisiana-one-party-consent-recording' },
+      ],
+      image: '/images/case-files-desk.jpg',
+    },
+    {
+      slug: 'gretna',
+      name: 'Gretna',
+      state: 'LA',
+      county: 'Jefferson Parish',
+      intro: 'Gretna is the parish seat of Jefferson Parish, located on the West Bank of the Mississippi River. As the location of Jefferson Parish government offices and the 24th Judicial District Court, Gretna is central to many legal matters that require PI involvement.',
+      neighborhoods: ['McDonoghville', 'Oakdale', 'Stumpf', 'Gretna Waterfront', 'Westbank Expressway Corridor'],
+      landmarks: ['Jefferson Parish Courthouse', 'Gretna Historic District', 'Gretna Police Station', 'David Drive', 'Westbank Expressway'],
+      services: 'Gretna\'s position as the Jefferson Parish seat makes it a frequent hub for legal proceedings requiring investigative documentation. Our referred PIs handle surveillance, process serving support, courthouse record research, and domestic investigations across Gretna and the West Bank.',
+      relatedPosts: [
+        { label: 'Attorney & PI Working Together in Louisiana', href: '/blog/attorney-private-investigator-louisiana' },
+        { label: 'Insurance Fraud Investigation in Louisiana', href: '/blog/insurance-fraud-investigation-louisiana' },
+        { label: 'Missing Person Investigation in Jefferson Parish', href: '/blog/missing-person-investigation-jefferson-parish' },
+      ],
+      image: '/images/courthouse-justice.jpg',
+    },
+    {
+      slug: 'harvey',
+      name: 'Harvey',
+      state: 'LA',
+      county: 'Jefferson Parish',
+      intro: 'Harvey is an unincorporated community in Jefferson Parish on the West Bank, bordered by Gretna, Marrero, and the Harvey Canal. The area\'s mix of residential neighborhoods and industrial corridors creates a diverse range of investigation needs.',
+      neighborhoods: ['Belle Terre', 'Westgate', 'Harvey Canal Area', 'English Turn adjacent', 'Woodmere'],
+      landmarks: ['Harvey Canal', 'Lapalco Blvd', 'Westbank Expressway', 'Belle Terre Blvd', 'Harvey Town Center'],
+      services: 'Harvey investigations include residential surveillance, workplace investigation for the area\'s many industrial and commercial businesses, insurance fraud cases, and skip tracing across Jefferson Parish\'s West Bank communities. Our PIs know the Harvey area and operate discreetly throughout the community.',
+      relatedPosts: [
+        { label: 'Insurance Fraud Investigation in Louisiana', href: '/blog/insurance-fraud-investigation-louisiana' },
+        { label: 'Workplace Investigation in Metairie', href: '/blog/workplace-investigation-metairie' },
+        { label: 'Louisiana GPS Tracking Laws', href: '/blog/louisiana-gps-tracking-laws-private-investigator' },
+      ],
+      image: '/images/digital-investigation.jpg',
+    },
+    {
+      slug: 'marrero',
+      name: 'Marrero',
+      state: 'LA',
+      county: 'Jefferson Parish',
+      intro: 'Marrero is one of the largest communities on the West Bank of Jefferson Parish. Its substantial residential population and proximity to the Barataria Basin make it a significant area for private investigation services in southern Louisiana.',
+      neighborhoods: ['Timberlane', 'Barataria', 'Ames', 'Westwego adjacent', 'Estelle', 'Marrero Town Center'],
+      landmarks: ['Barataria Preserve', 'Lapalco Blvd', 'Holmes Blvd', 'Westwego', 'Crown Point area'],
+      services: 'Marrero investigation services include domestic surveillance, infidelity and custody cases, background checks for residents and local businesses, skip tracing, and missing persons investigations. Our referred PIs are familiar with Marrero\'s neighborhoods and can conduct professional investigations throughout the community.',
+      relatedPosts: [
+        { label: 'OSINT: What a PI Can Find Online', href: '/blog/osint-what-pi-can-find-online' },
+        { label: 'Skip Tracing in Metairie, Louisiana', href: '/blog/skip-tracing-metairie-louisiana' },
+        { label: 'How to Hire a PI in Metairie', href: '/blog/how-to-hire-private-investigator-metairie' },
+      ],
+      image: '/images/hero-surveillance-city.jpg',
+    },
+  ];
+
+  return cities.map(city => ({
+    params: { city: city.slug },
+    props: { city },
+  }));
+}
+
+const { city } = Astro.props;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Service Areas', href: '/service-areas' },
+  { label: city.name, href: `/service-areas/${city.slug}` },
+];
+
+const localSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": `PI Metairie — ${city.name}`,
+  "description": `Private investigator referral service in ${city.name}, ${city.state}. Licensed LSBPIE-regulated investigators.`,
+  "url": `https://privateinvestigatormetairie.com/service-areas/${city.slug}`,
+  "telephone": "+15048333716",
+  "areaServed": {
+    "@type": "City",
+    "name": city.name,
+    "addressRegion": city.state
+  }
+};
+---
+
+<BaseLayout
+  title={`Private Investigator in ${city.name}, LA | PI Metairie | (504) 833-3716`}
+  description={`Licensed private investigator referral service in ${city.name}, Louisiana. Surveillance, infidelity, background checks, skip tracing. Free consultation (504) 833-3716.`}
+  schema={localSchema}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <!-- Hero -->
+  <section style="background: var(--primary);" class="py-14">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold text-white mb-4" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+        Private Investigator in {city.name}, LA
+      </h1>
+      <p class="text-lg mb-6" style="color: rgba(255,255,255,0.8);">
+        Licensed, LSBPIE-regulated private investigators serving {city.name} and {city.county}.
+      </p>
+      <a href="tel:+15048333716" class="inline-flex items-center gap-2 px-6 py-3 font-bold text-white" style="background: var(--accent); border-radius: var(--radius);">
+        Call (504) 833-3716
+      </a>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div class="lg:col-span-2">
+
+        <!-- Intro -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4" style="color: var(--primary);">Private Investigation Services in {city.name}</h2>
+          <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">{city.intro}</p>
+          <p class="text-base leading-relaxed" style="color: var(--gray-600);">{city.services}</p>
+        </div>
+
+        <!-- Neighborhoods -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4" style="color: var(--primary);">Neighborhoods & Areas We Serve in {city.name}</h2>
+          <div class="flex flex-wrap gap-2">
+            {city.neighborhoods.map((n: string) => (
+              <span class="px-3 py-1 rounded text-sm" style="background: var(--bg-alt); color: var(--primary);">{n}</span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Landmarks -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4" style="color: var(--primary);">Local Landmarks & Reference Points</h2>
+          <ul class="space-y-2">
+            {city.landmarks.map((l: string) => (
+              <li class="flex items-start gap-2 text-sm" style="color: var(--gray-600);">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                {l}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Services in this area -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4" style="color: var(--primary);">Investigation Services Available in {city.name}</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {['Surveillance', 'Infidelity Investigation', 'Child Custody', 'Background Checks', 'Skip Tracing', 'Insurance Fraud', 'Missing Persons', 'Corporate Investigation'].map(svc => (
+              <div class="flex items-center gap-2 p-3 rounded" style="background: var(--bg-alt); border-radius: var(--radius);">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm font-medium" style="color: var(--primary);">{svc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Related Posts -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4" style="color: var(--primary);">Related Articles</h2>
+          <ul class="space-y-2">
+            {city.relatedPosts.map((post: { href: string; label: string }) => (
+              <li>
+                <a href={post.href} class="text-base font-medium" style="color: var(--accent);">→ {post.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Sidebar: Form -->
+      <div class="lg:col-span-1">
+        <div class="sticky top-24">
+          <div class="bg-white rounded-lg p-6 shadow-md border border-gray-100" style="border-radius: var(--radius-lg);">
+            <h3 class="text-xl font-bold mb-2" style="color: var(--primary);">Free Consultation in {city.name}</h3>
+            <p class="text-sm mb-4" style="color: var(--gray-500);">All inquiries are 100% confidential. No obligation.</p>
+            <LeadCaptureForm />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-4 pb-12">
+    <CTABanner
+      title={`Need a PI in ${city.name}?`}
+      subtitle="Licensed investigators available now. Free, confidential consultation."
+    />
+  </div>
+</BaseLayout>

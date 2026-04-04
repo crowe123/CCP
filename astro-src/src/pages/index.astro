@@ -1,0 +1,345 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import LeadCaptureForm from '../components/LeadCaptureForm.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does a private investigator cost in Metairie?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PI rates in the Metairie and New Orleans area typically range from $85–$150 per hour for standard surveillance and investigation services. Complex cases involving multiple investigators, specialized equipment, or rush assignments may cost more. Contact us for a free, no-obligation estimate tailored to your situation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I verify a PI is licensed in Louisiana?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All PIs must be licensed by the Louisiana State Board of Private Investigator Examiners (LSBPIE). You can verify a license online at the LSBPIE website by searching the licensee database. Every PI we refer is fully licensed and regulated by the LSBPIE."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is surveillance legal in Louisiana?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, when conducted by a licensed investigator following Louisiana law. Surveillance of individuals in public places, or from public vantage points, is legal. PIs cannot trespass, install hidden recording devices in private spaces, or intercept electronic communications without proper authority. A licensed PI knows these boundaries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How confidential is a private investigation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Licensed PIs in Louisiana are bound by professional confidentiality standards. Your case details, identity, and findings are kept strictly private. We never share client information with third parties. All consultations are 100% confidential with no obligation."
+      }
+    }
+  ]
+};
+
+const services = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`,
+    title: 'Surveillance',
+    desc: 'Covert mobile and stationary surveillance with video documentation admissible in court.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`,
+    title: 'Infidelity Investigation',
+    desc: 'Discreet, professional investigations when you suspect a cheating spouse or partner.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
+    title: 'Child Custody',
+    desc: 'Gather evidence for custody disputes and verify compliance with court-ordered agreements.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
+    title: 'Background Checks',
+    desc: 'Comprehensive background investigations on individuals, businesses, and potential partners.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
+    title: 'Skip Tracing',
+    desc: 'Locate missing persons, debtors, or witnesses using advanced database and field techniques.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+    title: 'Insurance Fraud',
+    desc: 'Investigate fraudulent insurance claims, workers\' comp fraud, and exaggerated injuries.',
+  },
+];
+
+const trustSignals = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`,
+    title: 'Licensed Louisiana PI',
+    desc: 'Every investigator we refer holds a current Louisiana PI license in good standing.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`,
+    title: 'LSBPIE Regulated',
+    desc: 'The Louisiana State Board of Private Investigator Examiners licenses and regulates all PIs we refer.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>`,
+    title: 'Confidential Consultations',
+    desc: 'Your identity and case details are never shared. 100% confidential, no obligation.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
+    title: 'Serving Jefferson Parish',
+    desc: 'Local knowledge of Metairie, Kenner, Harahan, Gretna, Harvey, Marrero and surrounding areas.',
+  },
+];
+
+const quickNavCards = [
+  { label: 'Blog & Guides', href: '/blog', desc: 'Expert articles on Louisiana PI law and investigations', icon: '📰' },
+  { label: 'Our Services', href: '/services', desc: 'Full list of investigation services we refer', icon: '🔍' },
+  { label: 'Service Areas', href: '/service-areas', desc: 'Cities and neighborhoods we serve in Jefferson Parish', icon: '📍' },
+  { label: 'About Us', href: '/about', desc: 'How our referral service works and why it matters', icon: 'ℹ️' },
+  { label: 'Free Tools', href: '/tools', desc: 'Cost calculator and investigation assessment quiz', icon: '🛠️' },
+  { label: 'Contact Us', href: '/contact', desc: 'Free confidential consultation — no obligation', icon: '📞' },
+];
+
+const faqs = [
+  {
+    q: "How much does a private investigator cost in Metairie?",
+    a: "PI rates in the Metairie and New Orleans area typically range from $85–$150 per hour for standard surveillance and investigation services. Complex cases involving multiple investigators, specialized equipment, or rush assignments may cost more. Contact us for a free, no-obligation estimate tailored to your situation."
+  },
+  {
+    q: "How do I verify a PI is licensed in Louisiana?",
+    a: "All PIs must be licensed by the Louisiana State Board of Private Investigator Examiners (LSBPIE). You can verify a license online at the LSBPIE website. Every investigator we refer holds a current, valid Louisiana PI license."
+  },
+  {
+    q: "Is surveillance legal in Louisiana?",
+    a: "Yes, when conducted by a licensed investigator following Louisiana law. Surveillance in public places is legal. PIs cannot trespass or install hidden recording devices in private spaces. A licensed PI understands these legal boundaries and ensures evidence is admissible."
+  },
+  {
+    q: "How confidential is a private investigation?",
+    a: "Licensed PIs in Louisiana are bound by professional confidentiality standards. Your case details, identity, and findings are kept strictly private. We never share client information with third parties. All consultations are 100% confidential."
+  }
+];
+---
+
+<BaseLayout
+  title="Private Investigator Metairie, LA | Licensed PI Referral | (504) 833-3716"
+  description="Licensed private investigator referral service in Metairie, Louisiana. Surveillance, infidelity, child custody, background checks. Free confidential consultation. Call (504) 833-3716."
+  schema={faqSchema}
+>
+  <!-- SECTION 1: HERO -->
+  <section style="background: var(--primary); position: relative; overflow: hidden;">
+    <div style="position: absolute; inset: 0; background: url('/images/hero-surveillance-city.jpg') center/cover no-repeat; opacity: 0.15;"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Left: Text -->
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded text-xs font-semibold mb-6" style="background: rgba(196,154,60,0.2); color: var(--accent); border: 1px solid rgba(196,154,60,0.3);">
+            🔒 LSBPIE Licensed Investigators Only
+          </div>
+          <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6" style="font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.15;">
+            Professional Private Investigation Services in Metairie, Louisiana
+          </h1>
+          <p class="text-lg mb-3" style="color: rgba(255,255,255,0.85);">
+            We connect Metairie and Jefferson Parish residents with licensed, LSBPIE-regulated private investigators who deliver court-admissible results.
+          </p>
+          <p class="text-base mb-8" style="color: rgba(255,255,255,0.7);">
+            All consultations are 100% confidential — no obligation. Available 24/7 for urgent matters.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a
+              href="tel:+15048333716"
+              class="inline-flex items-center justify-center gap-2 px-6 py-4 font-bold text-white text-lg"
+              style="background: var(--accent); border-radius: var(--radius);"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              Call (504) 833-3716
+            </a>
+            <a
+              href="/contact"
+              class="inline-flex items-center justify-center gap-2 px-6 py-4 font-bold text-lg border-2"
+              style="border-color: var(--accent); color: var(--accent); border-radius: var(--radius);"
+            >
+              Free Consultation
+            </a>
+          </div>
+        </div>
+        <!-- Right: Trust Badge -->
+        <div class="hidden lg:block">
+          <div class="rounded-lg p-8" style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(4px);">
+            <h2 class="text-lg font-bold text-white mb-6" style="font-family: 'Plus Jakarta Sans', sans-serif;">Why Choose PI Metairie?</h2>
+            <ul class="space-y-4">
+              {[
+                'All investigators are LSBPIE licensed',
+                'Serving Jefferson Parish since 2010',
+                'Court-admissible evidence and documentation',
+                '100% confidential — no obligation consultations',
+                'Available 24/7 for urgent situations',
+                'Competitive rates: $85–$150/hour',
+              ].map(item => (
+                <li class="flex items-start gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span style="color: rgba(255,255,255,0.85);">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6 pt-6" style="border-top: 1px solid rgba(255,255,255,0.1);">
+              <p class="text-xs" style="color: rgba(255,255,255,0.5);">One Galleria Blvd., Suite 1900<br/>Metairie, LA 70001</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: QUICK NAV GRID -->
+  <section style="background: var(--bg-alt);" class="py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-center mb-8" style="color: var(--primary);">Explore PI Metairie</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {quickNavCards.map(card => (
+          <a
+            href={card.href}
+            class="group bg-white rounded-lg p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all hover:border-accent"
+            style="border-radius: var(--radius);"
+          >
+            <div class="text-3xl mb-3">{card.icon}</div>
+            <h3 class="font-bold text-base mb-1 group-hover:text-accent transition-colors" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">{card.label}</h3>
+            <p class="text-sm" style="color: var(--gray-500);">{card.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: SERVICES OVERVIEW -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-3" style="color: var(--primary);">Private Investigation Services</h2>
+        <p class="text-lg max-w-2xl mx-auto" style="color: var(--gray-500);">Comprehensive investigation services for Metairie and Jefferson Parish residents, delivered by licensed professionals.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map(service => (
+          <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all group" style="border-radius: var(--radius);">
+            <div class="mb-4" style="color: var(--accent);" set:html={service.icon} />
+            <h3 class="text-lg font-bold mb-2 group-hover:text-accent transition-colors" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">{service.title}</h3>
+            <p class="text-sm leading-relaxed mb-4" style="color: var(--gray-500);">{service.desc}</p>
+            <a href="/services" class="text-sm font-semibold" style="color: var(--accent);">Learn More →</a>
+          </div>
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/services" class="inline-block px-8 py-3 font-bold text-white" style="background: var(--primary); border-radius: var(--radius);">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: WHY CHOOSE US -->
+  <section style="background: var(--bg-alt);" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-3" style="color: var(--primary);">Why Choose PI Metairie?</h2>
+        <p class="text-lg max-w-2xl mx-auto" style="color: var(--gray-500);">We only refer licensed, vetted private investigators who meet Louisiana's strict regulatory standards.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {trustSignals.map(signal => (
+          <div class="bg-white rounded-lg p-6 text-center shadow-sm border border-gray-100" style="border-radius: var(--radius);">
+            <div class="mx-auto mb-4 w-16 h-16 rounded-full flex items-center justify-center" style="background: rgba(15,26,46,0.06);">
+              <div style="color: var(--accent);" set:html={signal.icon} />
+            </div>
+            <h3 class="font-bold mb-2" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">{signal.title}</h3>
+            <p class="text-sm leading-relaxed" style="color: var(--gray-500);">{signal.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: TESTIMONIALS -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-3" style="color: var(--primary);">What Our Clients Say</h2>
+        <p class="text-lg" style="color: var(--gray-500);">Trusted by families and businesses across Metairie and Jefferson Parish.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <TestimonialCard
+          quote="The investigator they referred me to was professional, discreet, and had results within 48 hours. Completely changed my situation in the custody case."
+          name="Michael T."
+          city="Metairie, LA"
+          stars={5}
+        />
+        <TestimonialCard
+          quote="I was nervous about hiring a PI but the consultation was completely judgment-free. They explained everything, answered my questions, and matched me with the right investigator."
+          name="Sandra R."
+          city="Kenner, LA"
+          stars={5}
+        />
+        <TestimonialCard
+          quote="Used PI Metairie for a background check on a business partner. Thorough, fast, and the report was exactly what our attorney needed."
+          name="James L."
+          city="New Orleans, LA"
+          stars={5}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: LEAD CAPTURE -->
+  <section style="background: var(--primary);" class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-white mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Get a Free, Confidential Consultation</h2>
+        <p class="text-lg" style="color: rgba(255,255,255,0.8);">Tell us about your situation and we'll match you with the right licensed investigator in Metairie.</p>
+      </div>
+      <div class="bg-white rounded-lg p-8" style="border-radius: var(--radius-lg);">
+        <LeadCaptureForm />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: FAQ SNIPPET -->
+  <section style="background: var(--bg-alt);" class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-3" style="color: var(--primary);">Frequently Asked Questions</h2>
+        <p class="text-lg" style="color: var(--gray-500);">Common questions about private investigation services in Metairie and Louisiana.</p>
+      </div>
+      <div class="space-y-4">
+        {faqs.map(faq => (
+          <details class="bg-white rounded-lg shadow-sm border border-gray-100 group" style="border-radius: var(--radius);">
+            <summary class="px-6 py-4 font-semibold cursor-pointer list-none flex items-center justify-between" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+              {faq.q}
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 pt-2 text-sm leading-relaxed" style="color: var(--gray-600);">{faq.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: FINAL CTA BANNER -->
+  <section class="py-4 px-4">
+    <div class="max-w-4xl mx-auto">
+      <CTABanner
+        title="Ready to Get Answers? Contact PI Metairie Today"
+        subtitle="Free, confidential consultation. No obligation. Licensed investigators ready to help."
+      />
+    </div>
+  </section>
+</BaseLayout>

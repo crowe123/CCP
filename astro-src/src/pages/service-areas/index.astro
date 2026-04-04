@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABanner from '../../components/CTABanner.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Service Areas', href: '/service-areas' },
+];
+
+const areas = [
+  {
+    city: 'Metairie',
+    slug: 'metairie',
+    desc: 'Our primary service area. Licensed PIs covering all of Metairie and Jefferson Parish.',
+    highlights: ['Old Metairie', 'Lake Vista', 'Fat City', 'Bucktown'],
+    image: '/images/metairie-neighborhood.jpg',
+  },
+  {
+    city: 'Kenner',
+    slug: 'kenner',
+    desc: 'Serving Kenner and all areas near Louis Armstrong International Airport.',
+    highlights: ['Laketown', 'Chateau Estates', 'West Esplanade', 'Rivertown'],
+    image: '/images/surveillance-binoculars.jpg',
+  },
+  {
+    city: 'Harahan',
+    slug: 'harahan',
+    desc: 'Licensed investigator referrals throughout Harahan and River Ridge.',
+    highlights: ['River Ridge', 'Elm Grove', 'Jefferson Heights', 'Chateau Estates'],
+    image: '/images/case-files-desk.jpg',
+  },
+  {
+    city: 'Gretna',
+    slug: 'gretna',
+    desc: 'PI referral services across Gretna and the West Bank of Jefferson Parish.',
+    highlights: ['Stumpf', 'Oakdale', 'McDonoghville', 'Gretna Waterfront'],
+    image: '/images/courthouse-justice.jpg',
+  },
+  {
+    city: 'Harvey',
+    slug: 'harvey',
+    desc: 'Serving Harvey and surrounding West Bank communities in Jefferson Parish.',
+    highlights: ['Belle Terre', 'Westgate', 'Harvey Canal', 'English Turn'],
+    image: '/images/digital-investigation.jpg',
+  },
+  {
+    city: 'Marrero',
+    slug: 'marrero',
+    desc: "Licensed PI referrals for Marrero and all of Jefferson Parish's West Bank.",
+    highlights: ['Westwego', 'Timberlane', 'Barataria', 'Ames'],
+    image: '/images/hero-surveillance-city.jpg',
+  },
+];
+---
+
+<BaseLayout
+  title="Private Investigator Service Areas | Jefferson Parish, LA | PI Metairie"
+  description="PI Metairie serves Metairie, Kenner, Harahan, Gretna, Harvey, Marrero and all of Jefferson Parish, Louisiana. Licensed PI referral service."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <section style="background: var(--primary);" class="py-14">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold text-white mb-4" style="font-family: 'Plus Jakarta Sans', sans-serif;">Private Investigator Service Areas</h1>
+      <p class="text-lg" style="color: rgba(255,255,255,0.8);">Serving Metairie, Jefferson Parish, and the Greater New Orleans area with licensed PI referrals.</p>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {areas.map(area => (
+        <a
+          href={`/service-areas/${area.slug}`}
+          class="group bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all"
+          style="border-radius: var(--radius);"
+        >
+          <div class="h-40 overflow-hidden">
+            <img
+              src={area.image}
+              alt={`Private Investigator ${area.city}, LA`}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-5">
+            <h2 class="text-xl font-bold mb-1 group-hover:text-accent transition-colors" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+              PI in {area.city}, LA
+            </h2>
+            <p class="text-sm leading-relaxed mb-3" style="color: var(--gray-500);">{area.desc}</p>
+            <div class="flex flex-wrap gap-2">
+              {area.highlights.map(h => (
+                <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-alt); color: var(--gray-600);">{h}</span>
+              ))}
+            </div>
+            <p class="mt-3 text-sm font-semibold" style="color: var(--accent);">View Investigators →</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-4 pb-12">
+    <CTABanner
+      title="Don't See Your Area?"
+      subtitle="We may still be able to help. Contact us and we'll find a licensed PI near you."
+    />
+  </div>
+</BaseLayout>

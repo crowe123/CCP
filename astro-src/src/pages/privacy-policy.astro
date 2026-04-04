@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+];
+---
+
+<BaseLayout
+  title="Privacy Policy | PI Metairie"
+  description="Privacy policy for PI Metairie — how we collect, use, and protect your personal information."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-2" style="color: var(--primary);">Privacy Policy</h1>
+    <p class="text-sm mb-8" style="color: var(--gray-500);">Last updated: April 4, 2026</p>
+
+    <div class="prose max-w-none space-y-6" style="color: var(--gray-600);">
+
+      <p>PI Metairie ("we," "our," or "us") operates the website privateinvestigatormetairie.com (the "Site"). This Privacy Policy explains how we collect, use, disclose, and protect your personal information when you visit our Site or contact us for our referral services.</p>
+
+      <h2>Information We Collect</h2>
+      <p>We collect information you voluntarily provide, including:</p>
+      <ul>
+        <li><strong>Contact Information:</strong> Name, phone number, email address, and location/ZIP code when you complete our inquiry form or contact us directly.</li>
+        <li><strong>Situation Description:</strong> Details about your investigation needs that you voluntarily share with us.</li>
+        <li><strong>Communication Records:</strong> Records of phone calls, emails, and form submissions.</li>
+      </ul>
+
+      <p>We also automatically collect certain technical information:</p>
+      <ul>
+        <li><strong>Log Data:</strong> IP address, browser type, pages visited, time and date of visit.</li>
+        <li><strong>Cookies:</strong> Small data files stored on your device to improve site functionality and analytics.</li>
+      </ul>
+
+      <h2>How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
+      <ul>
+        <li>Connect you with licensed private investigators appropriate for your situation</li>
+        <li>Respond to your inquiries and provide follow-up consultations</li>
+        <li>Improve our website and services</li>
+        <li>Send relevant information if you have opted in</li>
+        <li>Comply with legal obligations</li>
+      </ul>
+
+      <h2>Cookies and Tracking Technologies</h2>
+      <p>Our Site uses cookies and similar tracking technologies to analyze traffic and improve user experience. We use Google Analytics to understand how visitors interact with our site. You can opt out of Google Analytics tracking by installing the Google Analytics Opt-out Browser Add-on.</p>
+      <p>You can set your browser to refuse cookies or to alert you when cookies are being sent. However, some parts of the Site may not function properly without cookies.</p>
+
+      <h2>Formspree Form Data</h2>
+      <p>Our contact forms are processed by Formspree, Inc. When you submit a form on our site, your data is transmitted to Formspree's servers and forwarded to us by email. Formspree's privacy policy applies to the processing of your form data. We receive and store your form submissions for the purpose of responding to your inquiry.</p>
+
+      <h2>Third-Party Services</h2>
+      <p>We use the following third-party services that may collect information about you:</p>
+      <ul>
+        <li><strong>Google Analytics:</strong> Website traffic analysis</li>
+        <li><strong>Google Fonts:</strong> Typography services</li>
+        <li><strong>Formspree:</strong> Form processing and submission handling</li>
+      </ul>
+      <p>These services have their own privacy policies and we are not responsible for their practices.</p>
+
+      <h2>Data Sharing and Disclosure</h2>
+      <p>We take your confidentiality seriously. We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following limited circumstances:</p>
+      <ul>
+        <li>With licensed private investigators as part of our referral service, with your consent</li>
+        <li>With service providers who assist in operating our website</li>
+        <li>When required by law or to protect our legal rights</li>
+        <li>In connection with a business transfer or merger</li>
+      </ul>
+
+      <h2>Data Security</h2>
+      <p>We implement reasonable security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure, and we cannot guarantee absolute security.</p>
+
+      <h2>Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Request access to personal information we hold about you</li>
+        <li>Request correction of inaccurate information</li>
+        <li>Request deletion of your personal information</li>
+        <li>Opt out of marketing communications</li>
+      </ul>
+      <p>To exercise these rights, contact us at info@privateinvestigatormetairie.com.</p>
+
+      <h2>Children's Privacy</h2>
+      <p>Our Site is not directed to children under the age of 13. We do not knowingly collect personal information from children.</p>
+
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by posting the new policy on this page with an updated date.</p>
+
+      <h2>Contact Us</h2>
+      <p>If you have questions about this Privacy Policy, please contact us at:</p>
+      <p>
+        PI Metairie<br/>
+        One Galleria Blvd., Suite 1900<br/>
+        Metairie, LA 70001<br/>
+        Phone: (504) 833-3716<br/>
+        Email: info@privateinvestigatormetairie.com
+      </p>
+    </div>
+  </section>
+</BaseLayout>
