@@ -1,0 +1,522 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import LeadCaptureForm from '../components/LeadCaptureForm.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does a private investigator cost in Metairie?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PI rates in the Metairie and New Orleans area typically range from $75 and $200 per hour for standard surveillance work. Most investigators require a retainer before work begins, typically between $500 and $5,000 depending on the case type. Contact a licensed investigator for a free, no-obligation estimate tailored to your situation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I verify a PI is licensed in Louisiana?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All PIs must be licensed by the Louisiana State Board of Private Investigator Examiners (LSBPIE). You can verify a license online at lsbpie.com by searching the licensee database."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is surveillance legal in Louisiana?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, when conducted by a licensed investigator following Louisiana law. A licensed PI can legally conduct covert surveillance in any public place. They cannot enter private property without permission, tap phone lines, or impersonate law enforcement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How confidential is a private investigation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Licensed PIs in Louisiana are bound by professional confidentiality standards. Case details, identity, and findings are kept strictly private. All consultations are 100% confidential with no obligation."
+      }
+    }
+  ]
+};
+
+const services = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`,
+    title: 'Surveillance',
+    desc: 'Covert mobile and stationary surveillance with time-stamped video documentation admissible in court.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`,
+    title: 'Infidelity Investigation',
+    desc: 'Discreet, professional investigations for suspected infidelity. Results in two to seven days of active observation.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
+    title: 'Child Custody',
+    desc: 'Systematic documented evidence for Jefferson Parish family court. Custody compliance, environment, and supervision.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
+    title: 'Background Checks',
+    desc: 'Court records, financial filings, employment history, and criminal databases not accessible through standard searches.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
+    title: 'Skip Tracing',
+    desc: 'Database research, OSINT, public records, and field canvassing to locate people who do not want to be found.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+    title: 'Insurance Fraud',
+    desc: 'Disability claims, workers\' compensation fraud, and staged accident investigations throughout Louisiana.',
+  },
+];
+
+const faqs = [
+  {
+    q: "How much does a private investigator cost in Metairie?",
+    a: "In the greater New Orleans metro area, most investigators charge between $75 and $200 per hour for standard surveillance work. Most investigators require a retainer before work begins, typically between $500 and $5,000 depending on the case type. Call for a free, no-obligation estimate."
+  },
+  {
+    q: "How do I verify a PI is licensed in Louisiana?",
+    a: "All PIs must be licensed by the Louisiana State Board of Private Investigator Examiners (LSBPIE). Ask for the license number and verify it at lsbpie.com. Every investigator referred through this service holds a current, valid Louisiana PI license."
+  },
+  {
+    q: "Is surveillance legal in Louisiana?",
+    a: "Yes, when conducted by a licensed investigator. A licensed PI in Louisiana can legally conduct covert surveillance in any public place and photograph or film a subject where there is no reasonable expectation of privacy. Louisiana is also a one-party consent state for audio recording."
+  },
+  {
+    q: "How confidential is a private investigation?",
+    a: "Licensed PIs in Louisiana are bound by professional confidentiality standards under LSBPIE regulations. Case details, identity, and findings are kept strictly private. All consultations are 100% confidential with no obligation."
+  },
+  {
+    q: "What is the difference between a private investigator and a private detective?",
+    a: "Nothing. Both terms are used interchangeably in Louisiana R.S. 37:3503. Both are licensed and regulated by the LSBPIE."
+  },
+  {
+    q: "Can a PI access someone's private social media or phone records?",
+    a: "No. Public profiles are fair game for OSINT research. Private accounts, private messages, and phone records obtained through deception are off limits — and evidence gathered that way can sink a case and expose the client to legal liability."
+  }
+];
+---
+
+<BaseLayout
+    title="Private Investigator Metairie: Licensed PI in LA | (504) 833-3716"
+  description="Connect with a licensed private investigator in Metairie, Louisiana. Surveillance, infidelity, child custody, background checks, skip tracing. Free confidential consultation. Call (504) 833-3716."
+  schema={faqSchema}
+>
+  <!-- HERO: Full-width with inline contact form -->
+  <section style="background: var(--primary); position: relative; overflow: hidden;">
+    <div style="position: absolute; inset: 0; background: url('/images/hero-pi-metairie.jpg') center/cover no-repeat; opacity: 0.12;" aria-hidden="true"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+        <!-- Left: Text -->
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded text-xs font-semibold mb-6" style="background: rgba(196,154,60,0.2); color: var(--accent); border: 1px solid rgba(196,154,60,0.3);">
+            🔒 LSBPIE Licensed Investigators Only
+          </div>
+          <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6" style="font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.15;">
+            Licensed Private Investigation Services in Metairie, Louisiana
+          </h1>
+          <p class="text-lg mb-4" style="color: rgba(255,255,255,0.85);">
+            Something feels wrong and you can't shake it. A licensed investigator in Metairie gets paid to find the truth and document it in a way that holds up — in court, in a custody hearing, in front of an insurance adjuster.
+          </p>
+          <p class="text-base mb-6" style="color: rgba(255,255,255,0.7);">
+            All consultations are 100% confidential. No obligation. Available evenings and weekends. Same-day consultations when possible.
+          </p>
+          <a
+            href="tel:+15048333716"
+            class="inline-flex items-center gap-2 px-6 py-4 font-bold text-white text-lg mb-8"
+            style="background: var(--accent); border-radius: var(--radius);"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            Call (504) 833-3716
+          </a>
+
+          <!-- Quick service list -->
+          <ul class="space-y-2">
+            {[
+              'Surveillance & Covert Photography',
+              'Infidelity & Domestic Investigations',
+              'Child Custody Documentation',
+              'Background Checks & Due Diligence',
+              'Skip Tracing & Person Locates',
+              'Insurance Fraud & Workers\' Comp',
+              'Process Serving — Jefferson & Orleans Parish',
+            ].map(item => (
+              <li class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm" style="color: rgba(255,255,255,0.8);">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Right: Contact Form in Hero -->
+        <div>
+          <div class="rounded-lg p-6 lg:p-8" style="background: rgba(255,255,255,0.97); border-radius: var(--radius-lg);">
+            <h2 class="text-xl font-bold mb-1" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+              Free Confidential Consultation
+            </h2>
+            <p class="text-sm mb-5" style="color: var(--gray-500);">No obligation. All information is kept strictly confidential.</p>
+            <LeadCaptureForm />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES OVERVIEW -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-3" style="color: var(--primary);">Investigation Services</h2>
+        <p class="text-lg max-w-2xl mx-auto" style="color: var(--gray-500);">A full-service investigator in this area covers more ground than most people expect.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map(service => (
+          <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all group" style="border-radius: var(--radius);">
+            <div class="mb-4" style="color: var(--accent);" set:html={service.icon} />
+            <h3 class="text-lg font-bold mb-2 group-hover:text-accent transition-colors" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">{service.title}</h3>
+            <p class="text-sm leading-relaxed mb-4" style="color: var(--gray-500);">{service.desc}</p>
+            <a href="/services" class="text-sm font-semibold" style="color: var(--accent);">Learn More →</a>
+          </div>
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/services" class="inline-block px-8 py-3 font-bold text-white" style="background: var(--primary); border-radius: var(--radius);">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL ARTICLE CONTENT -->
+  <section style="background: var(--bg-alt);" class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="prose-content">
+
+        <h2 class="text-3xl font-bold mb-6" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+          Getting Answers When You Really Need Them
+        </h2>
+
+        <p class="text-base leading-relaxed mb-5" style="color: var(--gray-600);">
+          Something feels wrong and you can't shake it. Maybe it's a spouse who started locking their phone. Maybe it's a custody order that isn't being followed. Maybe someone owes money and vanished. Whatever it is, sitting with the uncertainty is worse than knowing the truth.
+        </p>
+
+        <p class="text-base leading-relaxed mb-5" style="color: var(--gray-600);">
+          If you feel guilty or conflicted about even considering this, that is normal. Most people do. But the uncertainty is worse than knowing, and a good investigator understands that this is one of the hardest decisions you have had to make.
+        </p>
+
+        <p class="text-base leading-relaxed mb-5" style="color: var(--gray-600);">
+          A licensed private investigator in Metairie gets paid to find that truth and document it in a way that holds up. In court. In a custody hearing. In front of an insurance adjuster. This page connects people across Jefferson Parish with local investigators who know this community, know Louisiana law, and know how to handle sensitive cases with discretion.
+        </p>
+
+        <p class="text-base leading-relaxed mb-8" style="color: var(--gray-600);">
+          Call now for a free, confidential consultation. There is no obligation on the first call. You explain what is going on, the investigator asks a few questions, and they tell you honestly whether they can help and what it would cost. Most people wish they had called sooner. Available evenings and weekends. Same-day consultations when possible.
+        </p>
+
+        <div class="rounded-lg p-6 mb-8" style="background: rgba(15,26,46,0.04); border-left: 4px solid var(--accent);">
+          <a href="tel:+15048333716" class="flex items-center gap-3 font-bold text-xl" style="color: var(--primary);">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            (504) 833-3716 — Free Confidential Consultation
+          </a>
+        </div>
+
+        <h3 class="text-2xl font-bold mb-4 mt-10" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+          Why People in Metairie Hire a Private Investigator
+        </h3>
+
+        <p class="text-base leading-relaxed mb-5" style="color: var(--gray-600);">
+          Most people who reach out aren't dramatic people. They're sitting at their kitchen table in Old Metairie or Airline Park, staring at their phone, trying to figure out if what they're feeling is real. They search for a private investigator near them because they don't know who else to call.
+        </p>
+
+        <p class="text-base leading-relaxed mb-8" style="color: var(--gray-600);">
+          The most common reasons people in this area hire an investigator include domestic cases — infidelity, child custody disputes, missing family members — and professional investigations like fraud, background checks, and litigation support. Most clients reach out when they feel stuck, when they know something is off but can't get to the information on their own. That is the exact gap a good investigator fills.
+        </p>
+
+        <h3 class="text-2xl font-bold mb-4 mt-10" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+          How the Process Works
+        </h3>
+
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          Hiring a private investigator is straightforward once you know what to expect. Here is what happens from the first call to the final deliverable.
+        </p>
+
+        <div class="space-y-5 mb-8">
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm" style="background: var(--accent); color: #fff;">1</div>
+            <div>
+              <p class="font-semibold mb-1" style="color: var(--primary);">Free consultation.</p>
+              <p class="text-sm leading-relaxed" style="color: var(--gray-600);">Call or submit a contact form. The investigator listens to your situation, asks clarifying questions, and tells you whether investigation is warranted. This call is confidential and there is no cost.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm" style="background: var(--accent); color: #fff;">2</div>
+            <div>
+              <p class="font-semibold mb-1" style="color: var(--primary);">Case agreement and retainer.</p>
+              <p class="text-sm leading-relaxed" style="color: var(--gray-600);">If you decide to move forward, the investigator provides a written contract specifying scope of work, fee structure, and expected timeline. You pay a retainer, which is drawn down as work is performed. Under LSBPIE rules, this contract must be kept in the case file for three years.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm" style="background: var(--accent); color: #fff;">3</div>
+            <div>
+              <p class="font-semibold mb-1" style="color: var(--primary);">Active investigation.</p>
+              <p class="text-sm leading-relaxed" style="color: var(--gray-600);">Depending on the case type, this may involve field surveillance, database research, digital open-source intelligence, canvassing, or a combination. The investigator keeps you updated after each session. You are never left in the dark.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm" style="background: var(--accent); color: #fff;">4</div>
+            <div>
+              <p class="font-semibold mb-1" style="color: var(--primary);">Reporting and delivery.</p>
+              <p class="text-sm leading-relaxed" style="color: var(--gray-600);">When the case closes, you receive a professional written report with time-stamped evidence, a detailed observation log, and the investigator's findings. This report is designed to be handed directly to an attorney. If the case goes to trial, the investigator can provide a sworn affidavit and testify as a fact witness.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="text-2xl font-bold mb-4 mt-10" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+          What a Licensed Investigator Can Do in Louisiana
+        </h3>
+
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          A licensed PI in Louisiana can legally conduct covert surveillance in any public place. They can photograph and film a subject on public streets, in parking lots, outside restaurants, or in any space where there is no reasonable expectation of privacy. Court-admissible evidence gathered this way meets Louisiana evidentiary standards.
+        </p>
+
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          Louisiana is also a one-party consent state for audio recording. That means a person who is part of a conversation can legally record it without telling the other party.
+        </p>
+
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          What a PI cannot do is equally important to understand. They cannot enter private property without permission. They cannot tap a phone line or plant a listening device. They cannot impersonate law enforcement, which is a federal crime regardless of the state. They cannot use pretexting — false identity tactics — to obtain phone records or financial records. Both are specifically illegal under federal law. Any evidence gathered through those methods is not just inadmissible. It can sink the entire case and expose the client to legal liability.
+        </p>
+
+        <p class="text-base leading-relaxed mb-8" style="color: var(--gray-600);">
+          Licensed investigators in Louisiana are governed by Louisiana Revised Statutes 37:3500–3525 and regulated by the Louisiana State Board of Private Investigator Examiners (LSBPIE). They are bound by strict professional conduct rules including confidentiality, honesty, and avoidance of conflicts of interest.
+        </p>
+
+        <h3 class="text-2xl font-bold mb-4 mt-10" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+          Digital Investigations and Open-Source Intelligence
+        </h3>
+
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          A growing number of people looking for investigative help want to know specifically about digital work. Can an investigator look at someone's social media? Can they trace online activity? The answer is yes, within the bounds of what is publicly available.
+        </p>
+
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          Licensed investigators use open-source intelligence (OSINT) to gather information from publicly available digital sources. That includes public profiles on Facebook, Instagram, X, TikTok, and LinkedIn. If a subject posts publicly, an investigator can document it. A claimant who says they are injured but posts gym photos. A person who says they are in Metairie but keeps tagging locations in Houston. These contradictions surface in public posts and they are fair game in court.
+        </p>
+
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          Other OSINT techniques include reverse image searches to verify identity, username enumeration to find the same person across multiple platforms under different handles, precision search queries to surface buried public information, and public records research through court databases, property records, and professional licensing boards. Investigators working at this level also use specialized databases like TLO, IRB Search, and Tracers to pull information not available through standard public searches.
+        </p>
+
+        <p class="text-base leading-relaxed mb-8" style="color: var(--gray-600);">
+          What a PI cannot do digitally: hack into private accounts, access private messages, obtain phone records through deception, or access financial accounts. What they can do legally is often more than enough. People reveal a surprising amount about themselves in public posts.
+        </p>
+
+        <h3 class="text-2xl font-bold mb-4 mt-10" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+          Services a Licensed Investigator Handles
+        </h3>
+
+        <p class="text-base leading-relaxed mb-6" style="color: var(--gray-600);">
+          A full-service investigator in this area covers more ground than most people expect.
+        </p>
+
+        <h4 class="text-xl font-bold mb-3" style="color: var(--primary);">Surveillance</h4>
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          Covert surveillance is the core of most domestic and insurance cases. The investigator observes a subject, logs every detail — date, time, weather conditions, location, vehicle, activity — and backs it all up with time-stamped photos and video. That written record is called a surveillance log, and it is the foundation of any court-admissible case file.
+        </p>
+        <p class="text-base leading-relaxed mb-6" style="color: var(--gray-600);">
+          Surveillance comes in two forms. Stationary surveillance means watching a fixed location like a residence or workplace. Mobile surveillance means following a subject through traffic, which requires a different skill set entirely. Experienced investigators use techniques like paralleling and positioning a trigger. Getting "burned" — meaning the subject notices the surveillance — can compromise the entire case. A local investigator who knows Jefferson Parish roads has a significant advantage during mobile work.
+        </p>
+
+        <h4 class="text-xl font-bold mb-3" style="color: var(--primary);">Background Checks and Due Diligence</h4>
+        <p class="text-base leading-relaxed mb-6" style="color: var(--gray-600);">
+          These go far deeper than a Google search. An investigator accesses court records, financial filings, employment history, and criminal databases that the general public does not have access to. People use these before hiring a contractor, entering a business partnership, or getting married.
+        </p>
+
+        <h4 class="text-xl font-bold mb-3" style="color: var(--primary);">Skip Tracing and Locates</h4>
+        <p class="text-base leading-relaxed mb-6" style="color: var(--gray-600);">
+          Skip tracing combines database research, OSINT, public records, and field canvassing to find people who do not want to be found. Canvassing means physically visiting locations and talking to neighbors, coworkers, and contacts who may know where a subject has gone.
+        </p>
+
+        <h4 class="text-xl font-bold mb-3" style="color: var(--primary);">Process Serving</h4>
+        <p class="text-base leading-relaxed mb-6" style="color: var(--gray-600);">
+          Process serving is the delivery of legal documents to someone who needs to receive them and sometimes actively avoids it. Licensed investigators in the Metairie area handle difficult service of process throughout Jefferson Parish and Orleans Parish.
+        </p>
+
+        <h4 class="text-xl font-bold mb-3" style="color: var(--primary);">Asset Investigations</h4>
+        <p class="text-base leading-relaxed mb-6" style="color: var(--gray-600);">
+          Asset investigations are used in divorce proceedings, debt recovery, and civil litigation. If someone claims to have nothing while clearly living well, a discreet investigation can uncover hidden bank accounts, unreported property, undisclosed vehicles, and concealed income.
+        </p>
+
+        <h4 class="text-xl font-bold mb-3" style="color: var(--primary);">Cheating Spouse Investigations</h4>
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          The most common domestic case people bring to a Metairie investigator is a cheating spouse investigation. It is also the hardest call to make. Whether it is a cheating husband or a cheating wife, the emotional weight is the same, and the need for discreet, professional evidence gathering does not change.
+        </p>
+        <p class="text-base leading-relaxed mb-6" style="color: var(--gray-600);">
+          One thing worth knowing before calling: results are not always what you expect. Experienced investigators will tell you that a meaningful percentage of infidelity cases come back clean. When that happens, a clean report can bring genuine peace of mind. No evidence is still a result. In the tight-knit neighborhoods around Old Metairie and Country Club Estates, an infidelity case requires real discretion. A typical infidelity surveillance runs two to seven days of active field observation.
+        </p>
+
+        <h4 class="text-xl font-bold mb-3" style="color: var(--primary);">Child Custody Investigations in Jefferson Parish</h4>
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          When children are involved, the stakes change. Jefferson Parish family court judges need specific, documented evidence — not a feeling, not a suspicion, not something a third party mentioned on the phone.
+        </p>
+        <p class="text-base leading-relaxed mb-6" style="color: var(--gray-600);">
+          A licensed investigator handling a child custody case builds that documented record systematically. The target behaviors typically include whether the other parent is following the custody order, whether the children are in a safe environment, whether the other parent is exposing the kids to dangerous individuals or situations, and whether appropriate supervision is being provided.
+        </p>
+
+        <h4 class="text-xl font-bold mb-3" style="color: var(--primary);">Insurance Fraud and Workers' Compensation Surveillance</h4>
+        <p class="text-base leading-relaxed mb-8" style="color: var(--gray-600);">
+          Louisiana keeps investigators busy with insurance-related work. Disability claims, workers' compensation fraud, and staged accident investigations are a significant part of the caseload in this state.
+        </p>
+
+        <h3 class="text-2xl font-bold mb-4 mt-10" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+          What the Final Report Contains
+        </h3>
+
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          When an investigator closes a case, the client receives a professional written report. A proper report includes the date, start time, and end time of each observation session. It documents weather and lighting conditions, the specific location where the subject was observed, a physical description of the subject and any vehicle, and a factual, objective log of the subject's activities. Time-stamped photographs and video footage are attached. The report closes with the investigator's name, signature, and Louisiana license number.
+        </p>
+
+        <h3 class="text-2xl font-bold mb-4 mt-10" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+          What It Costs to Hire a Private Investigator
+        </h3>
+
+        <p class="text-base leading-relaxed mb-8" style="color: var(--gray-600);">
+          In the greater New Orleans metro area, most investigators charge between $75 and $200 per hour for standard surveillance work. Most investigators require a retainer before work begins, typically between $500 and $5,000 depending on the case type.
+        </p>
+
+        <h3 class="text-2xl font-bold mb-4 mt-10" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+          Before You Call: What to Have Ready
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+          <div class="bg-white rounded-lg p-5 shadow-sm" style="border-radius: var(--radius);">
+            <p class="font-bold mb-2 text-sm" style="color: var(--primary);">Infidelity or domestic surveillance:</p>
+            <ul class="space-y-1 text-sm" style="color: var(--gray-600);">
+              <li>• Subject's full name and date of birth</li>
+              <li>• Home and work address</li>
+              <li>• Vehicle make, model, color, and plate</li>
+              <li>• Recent photo</li>
+              <li>• Days/times suspicious behavior usually happens</li>
+            </ul>
+          </div>
+          <div class="bg-white rounded-lg p-5 shadow-sm" style="border-radius: var(--radius);">
+            <p class="font-bold mb-2 text-sm" style="color: var(--primary);">Child custody case:</p>
+            <ul class="space-y-1 text-sm" style="color: var(--gray-600);">
+              <li>• Custody order details and observed violations</li>
+              <li>• Other parent's address and vehicle description</li>
+            </ul>
+            <p class="font-bold mb-2 text-sm mt-4" style="color: var(--primary);">Background check:</p>
+            <ul class="space-y-1 text-sm" style="color: var(--gray-600);">
+              <li>• Full legal name, date of birth, last known address</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="text-2xl font-bold mb-4 mt-10" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+          Questions to Ask Before Hiring
+        </h3>
+
+        <ul class="space-y-2 mb-8">
+          {[
+            'Are you licensed in Louisiana? Ask for their license number, then verify at lsbpie.com.',
+            'Do you carry insurance and are you bonded?',
+            'Do you specialize in this type of case?',
+            'What is your fee structure and what does the retainer cover?',
+            'Will you provide a written report and can you testify in court if needed?',
+            'How often will you communicate during the case?',
+          ].map(q => (
+            <li class="flex items-start gap-3 text-sm" style="color: var(--gray-600);">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {q}
+            </li>
+          ))}
+        </ul>
+
+        <h3 class="text-2xl font-bold mb-4 mt-10" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+          Why Local Knowledge Matters
+        </h3>
+
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          Metairie is a suburb of New Orleans sitting in Jefferson Parish, just west of the city line. Old Metairie has oak-lined streets and tight residential blocks where an unfamiliar car parked for three hours gets noticed. Bucktown is a waterfront community near Lake Pontchartrain with dead-end streets near the marina. The Metairie Lakefront area, Airline Park, Bonnabel Place, and Country Club Estates all have different road patterns. River Ridge and Elmwood, just west of central Metairie, have their own layouts.
+        </p>
+
+        <p class="text-base leading-relaxed mb-8" style="color: var(--gray-600);">
+          An investigator who knows these neighborhoods doesn't burn a surveillance simply because they parked on the wrong block. That local familiarity is not a minor advantage — in mobile surveillance, it can be the difference between a clean case file and a compromised one.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-3" style="color: var(--primary);">Frequently Asked Questions</h2>
+        <p class="text-lg" style="color: var(--gray-500);">Common questions about private investigation services in Metairie and Louisiana.</p>
+      </div>
+      <div class="space-y-4">
+        {faqs.map(faq => (
+          <details class="bg-white rounded-lg shadow-sm border border-gray-100 group" style="border-radius: var(--radius);">
+            <summary class="px-6 py-4 font-semibold cursor-pointer list-none flex items-center justify-between" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">
+              {faq.q}
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-5 pt-2 text-sm leading-relaxed" style="color: var(--gray-600);">{faq.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background: var(--primary);" class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4" style="font-family: 'Plus Jakarta Sans', sans-serif;">Ready to Get Answers?</h2>
+      <p class="text-lg mb-8" style="color: rgba(255,255,255,0.8);">
+        Most investigators in the Metairie area offer a free, confidential first call. There is no commitment.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="tel:+15048333716"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 font-bold text-white text-lg"
+          style="background: var(--accent); border-radius: var(--radius);"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          Call (504) 833-3716
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 font-bold text-lg border-2"
+          style="border-color: var(--accent); color: var(--accent); border-radius: var(--radius);"
+        >
+          Submit a Consultation Request
+        </a>
+      </div>
+      <p class="text-sm mt-6" style="color: rgba(255,255,255,0.5);">
+        Serving Metairie, Old Metairie, Bucktown, Metairie Lakefront, Airline Park, Bonnabel Place, Country Club Estates, River Ridge, Elmwood, Kenner, Harahan, and surrounding communities in Jefferson Parish and the greater New Orleans metro area.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>

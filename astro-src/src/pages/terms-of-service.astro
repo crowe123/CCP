@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Terms of Service', href: '/terms-of-service' },
+];
+---
+
+<BaseLayout
+  title="Terms of Service | PI Metairie"
+  description="Terms of service for PI Metairie — a private investigator referral service in Metairie, Louisiana."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-2" style="color: var(--primary);">Terms of Service</h1>
+    <p class="text-sm mb-8" style="color: var(--gray-500);">Last updated: April 4, 2026</p>
+
+    <div class="prose max-w-none space-y-6" style="color: var(--gray-600);">
+
+      <p>Please read these Terms of Service ("Terms") carefully before using the privateinvestigatormetairie.com website (the "Site") operated by PI Metairie ("we," "us," or "our").</p>
+
+      <h2>Referral Service Disclaimer</h2>
+      <p><strong>PI Metairie is a referral service, not a licensed private investigation agency.</strong> We do not conduct investigations ourselves. This service connects individuals seeking investigation services with licensed, independent private investigators who operate their own businesses.</p>
+      <p>The private investigators this service refers are independent contractors, not employees or agents of PI Metairie. PI Metairie is not responsible for the actions, conduct, findings, or quality of work of any referred investigator.</p>
+      <p>Your engagement agreement, service contract, and professional relationship is directly with the referred investigator — not with PI Metairie. PI Metairie makes no representation regarding the outcome of any investigation.</p>
+
+      <h2>No Attorney-Client Relationship</h2>
+      <p>Nothing on this Site or in any communication with PI Metairie constitutes legal advice or creates an attorney-client relationship. The information on this Site is provided for general informational purposes only and does not constitute legal advice.</p>
+      <p>If you have legal questions regarding your situation, you should consult a licensed Louisiana attorney. PI Metairie can refer you to a licensed PI who may work in coordination with your attorney, but PI Metairie itself does not provide legal services.</p>
+
+      <h2>No Guarantee of Outcome</h2>
+      <p>PI Metairie makes no guarantee, representation, or warranty regarding the outcome, results, or findings of any investigation conducted by a referred investigator. Investigation outcomes depend on numerous factors beyond anyone's control, including the subject's behavior, available evidence, legal constraints, and investigator capabilities.</p>
+      <p>The fact that this service refers an investigator does not guarantee that the investigation will produce the results you hope for or that any evidence gathered will be admissible in court. All such matters depend on the specific facts, circumstances, and legal standards applicable to your situation.</p>
+
+      <h2>License Verification</h2>
+      <p>While PI Metairie makes reasonable efforts to verify that referred investigators hold current Louisiana PI licenses issued by the Louisiana State Board of Private Investigator Examiners (LSBPIE), we cannot guarantee the current license status at the time of any referral. We strongly encourage all clients to independently verify the license of any investigator before engaging their services.</p>
+      <p>License status can be verified at the LSBPIE's official website or by contacting the LSBPIE directly.</p>
+
+      <h2>Acceptable Use</h2>
+      <p>You agree to use this Site only for lawful purposes. You may not use this referral services to facilitate any illegal activity, including but not limited to stalking, harassment, unauthorized surveillance, or obtaining information that you have no legal right to access.</p>
+      <p>We reserve the right to refuse service to anyone who we believe intends to use a referred investigator's services for illegal or harmful purposes.</p>
+
+      <h2>Intellectual Property</h2>
+      <p>All content on this Site, including text, graphics, logos, and images, is the property of PI Metairie or its content suppliers and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written permission.</p>
+
+      <h2>Limitation of Liability</h2>
+      <p>To the fullest extent permitted by Louisiana law, PI Metairie shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of this Site or reliance on any referred investigator's services. Our total liability to you shall not exceed the amount of any referral fee paid to us, if any.</p>
+
+      <h2>Louisiana Jurisdiction</h2>
+      <p>These Terms are governed by and construed in accordance with the laws of the State of Louisiana, without regard to its conflict of law provisions. Any disputes arising under these Terms shall be resolved exclusively in the courts of Jefferson Parish, Louisiana.</p>
+
+      <h2>Changes to Terms</h2>
+      <p>We reserve the right to modify these Terms at any time. Continued use of the Site after any changes constitutes your acceptance of the new Terms.</p>
+
+      <h2>Contact</h2>
+      <p>
+        PI Metairie<br/>
+        One Galleria Blvd., Suite 1900<br/>
+        Metairie, LA 70001<br/>
+        Phone: (504) 833-3716<br/>
+        Email: info@privateinvestigatormetairie.com
+      </p>
+    </div>
+  </section>
+</BaseLayout>

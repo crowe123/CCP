@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+];
+
+const services = [
+  {
+    id: 'surveillance',
+    title: 'Surveillance',
+    image: '/images/pi-surveillance.jpg',
+    desc: `Surveillance is the cornerstone of private investigation work in Louisiana. Licensed PIs conduct professional covert surveillance using state-of-the-art equipment to document activities, movements, and behaviors relevant to your case.
+
+Whether you need evidence for a legal proceeding, want to verify someone's whereabouts, or need documentation of a pattern of behavior, investigators deliver. All surveillance is conducted in compliance with Louisiana law — from public spaces and legal vantage points.
+
+Mobile surveillance follows subjects across the Greater New Orleans area including Metairie, Kenner, Harahan, and neighboring parishes. Stationary surveillance covers fixed locations like residences, businesses, and meeting spots. All footage is time-stamped and legally documented for court use.
+
+Licensed investigators carry the latest HD video cameras, long-range lenses, and GPS tracking equipment (where legally permitted). Reports are comprehensive, detailed, and formatted for use by attorneys and courts.
+
+Most surveillance cases in the Metairie area are resolved within 3–7 days of engagement. Rush surveillance is available for time-sensitive matters. Call (504) 833-3716 for a free consultation.`,
+    relatedPosts: [
+      { label: 'Surveillance Laws in Louisiana', href: '/articles/surveillance-laws-louisiana-pi' },
+      { label: 'Louisiana GPS Tracking Laws', href: '/articles/louisiana-gps-tracking-laws-private-investigator' },
+    ]
+  },
+  {
+    id: 'infidelity',
+    title: 'Infidelity Investigation',
+    image: '/images/case-files-desk.jpg',
+    desc: `Suspecting a cheating spouse or partner is one of the most emotionally difficult situations a person can face. Referred private investigators handle infidelity cases with absolute discretion, professionalism, and sensitivity.
+
+The emotional weight is understood of these investigations. Investigators are trained to gather factual evidence efficiently without causing unnecessary distress. Evidence gathered is documented in a format suitable for use in divorce proceedings, custody disputes, and legal matters.
+
+An infidelity investigation typically involves surveillance of the subject's activities, documentation of meetings, verification of stories and alibis, and digital intelligence gathering where legally permitted. Louisiana is a no-fault divorce state, but evidence of infidelity can still impact settlement and custody outcomes.
+
+Licensed investigators will never make assumptions or present unverified information. Every finding is documented with timestamps, GPS data, photos, and/or video. All investigations are completely confidential — the subject is never contacted and client identity is never revealed.
+
+Cases typically involve 2–5 days of surveillance depending on the subject's patterns. Call for a free, judgment-free consultation.`,
+    relatedPosts: [
+      { label: 'What to Expect in a Cheating Spouse Investigation', href: '/articles/cheating-spouse-investigation-what-to-expect' },
+      { label: 'Surveillance Laws in Louisiana', href: '/articles/surveillance-laws-louisiana-pi' },
+    ]
+  },
+  {
+    id: 'child-custody',
+    title: 'Child Custody Investigation',
+    image: '/images/courthouse-justice.jpg',
+    desc: `Child custody cases demand solid, factual evidence. Referred investigators specialize in gathering documentation that protects children and supports your legal position in Jefferson Parish family court proceedings.
+
+Custody investigations can verify whether a co-parent is complying with court-ordered arrangements, document neglect or unsafe living conditions, identify undisclosed relationships or living situations, and gather evidence of substance abuse or other behaviors that affect child welfare.
+
+All evidence is gathered legally and documented to meet Louisiana court standards. Licensed investigators work closely with family law attorneys in Jefferson Parish and the Greater New Orleans area to ensure findings are properly formatted and admissible.
+
+Services include surveillance at school pick-up and drop-off, documentation of the child's living environment, social media monitoring, interviews with witnesses, and comprehensive written reports. The urgency of custody matters is understood — investigators can mobilize quickly.
+
+If you have reason to believe your child is in an unsafe situation, do not wait. Call (504) 833-3716 immediately for an urgent consultation.`,
+    relatedPosts: [
+      { label: 'Child Custody Investigation in Jefferson Parish', href: '/articles/child-custody-investigation-jefferson-parish' },
+      { label: 'How to Hire a Private Investigator in Metairie', href: '/articles/how-to-hire-private-investigator-metairie' },
+    ]
+  },
+  {
+    id: 'background-checks',
+    title: 'Background Checks',
+    image: '/images/digital-investigation.jpg',
+    desc: `A thorough background investigation can protect you from fraud, deception, and dangerous individuals. Referred investigators conduct comprehensive background checks for individuals, businesses, and organizations across Metairie and Louisiana.
+
+Background investigations go far beyond what you can find online. Licensed PIs access court records, property records, employment history, professional license verifications, civil and criminal history, and much more. Findings are compiled into a clear, comprehensive report.
+
+Personal background checks are used before entering into romantic relationships, making new business partnerships, hiring contractors, or verifying someone you've met online. Business background checks help vet employees, partners, vendors, and investment opportunities.
+
+Licensed investigators also specialize in verifying professional credentials, identifying undisclosed identities or aliases, uncovering hidden assets, and verifying business registration and legitimacy. All background investigations comply with the Fair Credit Reporting Act (FCRA) and Louisiana state law.
+
+Turnaround time for standard background checks is 24–72 hours. Expedited service is available. Call to discuss your specific needs.`,
+    relatedPosts: [
+      { label: 'Background Check Guide for Metairie', href: '/articles/background-check-metairie' },
+      { label: 'What a PI Can Find Online (OSINT)', href: '/articles/osint-what-pi-can-find-online' },
+    ]
+  },
+  {
+    id: 'skip-tracing',
+    title: 'Skip Tracing',
+    image: '/images/metairie-neighborhood.jpg',
+    desc: `Skip tracing is the professional process of locating individuals who have moved or gone missing, whether intentionally or not. Referred investigators are experts in skip tracing across Louisiana and nationally.
+
+Skip tracing serves many purposes: locating a debtor who owes money, finding a witness needed for legal proceedings, reconnecting with a lost family member, or locating a subject for service of process. Licensed investigators use a combination of database searches, public records, field work, and social media intelligence.
+
+Louisiana has rich public records that experienced skip tracers know how to leverage. Combined with proprietary database access and field verification techniques, licensed investigators can locate most individuals within days. Serving Metairie, Jefferson Parish, the Greater New Orleans area, and can work cases statewide.
+
+All skip tracing is conducted in compliance with Louisiana privacy laws and the Fair Debt Collection Practices Act. Location information is not provided location information that would be used to harass or harm individuals.
+
+Results are typically delivered within 24–72 hours for cooperative cases. Complex cases involving intentional evasion may take longer. Call for a free consultation.`,
+    relatedPosts: [
+      { label: 'Skip Tracing in Metairie, Louisiana', href: '/articles/skip-tracing-metairie-louisiana' },
+      { label: 'What a PI Can Find Online (OSINT)', href: '/articles/osint-what-pi-can-find-online' },
+    ]
+  },
+  {
+    id: 'insurance-fraud',
+    title: 'Insurance Fraud Investigation',
+    image: '/images/case-files-desk.jpg',
+    desc: `Insurance fraud costs Louisiana businesses and consumers billions of dollars annually. Referred investigators specialize in uncovering fraudulent claims, staged accidents, exaggerated injuries, and workers' compensation fraud across the Greater New Orleans area.
+
+Insurance fraud investigations involve covert surveillance of claimants to document actual physical capabilities versus reported limitations, social media monitoring, witness interviews, background investigation of claimants, and coordination with insurance company investigators and attorneys.
+
+Licensed PIs have experience working with insurance companies, defense attorneys, and employers in Jefferson Parish and across Louisiana. Comprehensive investigative reports are delivered with video evidence, photographic documentation, and detailed written findings that stand up in court.
+
+Workers' compensation fraud is a particular specialty. If an employee claims to be unable to work or perform certain activities, licensed investigators can document their actual daily activities and physical capabilities through professional surveillance.
+
+All investigations comply with Louisiana insurance regulations and privacy laws. Findings are presented in a format compatible with legal proceedings and insurance claim adjustments. Contact us for a confidential consultation.`,
+    relatedPosts: [
+      { label: 'Insurance Fraud Investigation in Louisiana', href: '/articles/insurance-fraud-investigation-louisiana' },
+      { label: 'Surveillance Laws in Louisiana', href: '/articles/surveillance-laws-louisiana-pi' },
+    ]
+  },
+  {
+    id: 'missing-persons',
+    title: 'Missing Persons Investigation',
+    image: '/images/metairie-neighborhood.jpg',
+    desc: `When a family member, friend, or business associate goes missing, time is critical. Referred investigators in Metairie and Jefferson Parish have the experience and resources to conduct thorough missing persons investigations.
+
+Missing persons investigations involve field canvassing, witness interviews, database searches, social media intelligence, coordination with local law enforcement, and surveillance of known locations and associates. Licensed PIs work around the clock on urgent missing persons cases.
+
+The service handles a wide range of missing persons situations: adult children who have cut off contact, runaway minors (working in coordination with law enforcement), elderly individuals with dementia who have wandered, and individuals who may be in dangerous situations.
+
+Licensed investigators are experienced in the psychology and patterns of individuals who go missing voluntarily versus involuntarily. This allows us to prioritize search efforts efficiently and focus resources where they're most likely to yield results.
+
+For a missing persons emergency, call (504) 833-3716 immediately. Available 24/7 for urgent situations. Licensed investigators can mobilize within hours in the Metairie area.`,
+    relatedPosts: [
+      { label: 'Missing Person Investigation in Jefferson Parish', href: '/articles/missing-person-investigation-jefferson-parish' },
+      { label: 'Skip Tracing in Metairie', href: '/articles/skip-tracing-metairie-louisiana' },
+    ]
+  },
+  {
+    id: 'corporate',
+    title: 'Corporate & Workplace Investigation',
+    image: '/images/digital-investigation.jpg',
+    desc: `Workplace misconduct, employee theft, corporate espionage, and internal fraud are serious threats to businesses in the Metairie and Greater New Orleans area. Referred investigators specialize in discreet, thorough corporate investigations.
+
+Corporate investigation services include employee theft investigations, intellectual property theft and corporate espionage, workplace harassment investigations, due diligence on business partners and acquisitions, vendor fraud, workers' compensation fraud, and undercover investigations.
+
+Licensed PIs work closely with employment attorneys and HR professionals to ensure investigations comply with Louisiana employment law and produce findings that support appropriate disciplinary or legal action. All investigations are conducted with strict confidentiality to minimize workplace disruption.
+
+Undercover investigations involve placing a licensed investigator in a workplace setting to document misconduct firsthand. This is one of the most effective methods for uncovering theft, drug use, safety violations, and other workplace issues.
+
+Whether you need a single background check on a new hire or a complex multi-month undercover operation, licensed investigators have the expertise to deliver. Contact us for a confidential consultation about your business's specific needs.`,
+    relatedPosts: [
+      { label: 'Workplace Investigation in Metairie', href: '/articles/workplace-investigation-metairie' },
+      { label: 'Background Check Guide for Metairie', href: '/articles/background-check-metairie' },
+    ]
+  },
+];
+---
+
+<BaseLayout
+  title="Private Investigation Services Metairie, LA | PI Metairie"
+  description="Comprehensive private investigation services in Metairie, Louisiana: surveillance, infidelity, child custody, background checks, skip tracing, insurance fraud, missing persons, corporate investigations."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold mb-4" style="color: var(--primary);">Private Investigation Services in Metairie, LA</h1>
+      <p class="text-xl max-w-3xl mx-auto" style="color: var(--gray-500);">
+        Licensed, LSBPIE-regulated private investigators are referred for a full range of investigation services across Jefferson Parish and the Greater New Orleans area.
+      </p>
+    </div>
+
+    <!-- Services List -->
+    <div class="space-y-16">
+      {services.map((service, index) => (
+        <div id={service.id} class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div class={`lg:col-span-2 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+            <h2 class="text-3xl font-bold mb-4" style="color: var(--primary);">{service.title}</h2>
+            <div class="prose max-w-none">
+              {service.desc.split('\n\n').map(para => (
+                <p>{para}</p>
+              ))}
+            </div>
+            {service.relatedPosts && (
+              <div class="mt-6">
+                <p class="text-sm font-semibold mb-2" style="color: var(--gray-500);">Related Articles:</p>
+                <ul class="space-y-1">
+                  {service.relatedPosts.map(post => (
+                    <li>
+                      <a href={post.href} class="text-sm font-medium" style="color: var(--accent);">→ {post.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div class="mt-6">
+              <a href="/contact" class="inline-block px-6 py-3 font-bold text-white" style="background: var(--accent); border-radius: var(--radius);">
+                Get a Free Consultation
+              </a>
+            </div>
+          </div>
+          <div class={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+            <img
+              src={service.image}
+              alt={`${service.title} - Private Investigator Metairie Louisiana`}
+              alt={service.title + ' - PI Metairie'}
+              class="w-full rounded-lg shadow-md"
+              style="border-radius: var(--radius);"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-4 pb-12">
+    <CTABanner
+      title="Ready to Get Started?"
+      subtitle="Free, confidential consultation. Get connected with the right licensed investigator."
+    />
+  </div>
+</BaseLayout>

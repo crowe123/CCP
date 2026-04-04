@@ -1,0 +1,352 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Tools', href: '/tools' },
+  { label: 'Assessment Quiz', href: '/tools/assessment-quiz' },
+];
+
+const quizSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PI Investigation Assessment Quiz",
+  "url": "https://privateinvestigatormetairie.com/tools/assessment-quiz",
+  "description": "8-question quiz to help Metairie residents determine what type of private investigation service they need.",
+  "applicationCategory": "UtilityApplication"
+};
+---
+
+<BaseLayout
+  title="Investigation Assessment Quiz | What Type of PI Do You Need? | PI Metairie"
+  description="Take our 8-question quiz to find out what type of private investigation service is right for your situation in Metairie, Louisiana."
+  schema={quizSchema}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <section style="background: var(--primary);" class="py-12">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold text-white mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Investigation Assessment Quiz</h1>
+      <p class="text-lg" style="color: rgba(255,255,255,0.8);">8 questions to identify the right investigation service for your situation.</p>
+    </div>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+
+    <!-- Quiz Container -->
+    <div id="quiz-container" class="bg-white rounded-lg p-8 shadow-md border border-gray-100" style="border-radius: var(--radius-lg);">
+      <!-- Progress bar -->
+      <div class="mb-6">
+        <div class="flex justify-between text-sm mb-2" style="color: var(--gray-500);">
+          <span>Question <span id="q-num">1</span> of 8</span>
+          <span id="q-pct">12%</span>
+        </div>
+        <div class="w-full rounded-full h-2" style="background: var(--bg-alt);">
+          <div id="progress-bar" class="h-2 rounded-full transition-all duration-500" style="background: var(--accent); width: 12%;"></div>
+        </div>
+      </div>
+
+      <!-- Question -->
+      <div id="question-area">
+        <h2 id="question-text" class="text-xl font-bold mb-6" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;"></h2>
+        <div id="options-area" class="space-y-3"></div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="flex justify-between mt-8">
+        <button id="prev-btn" class="px-5 py-2 text-sm font-semibold border rounded" style="border-color: var(--gray-300); color: var(--gray-600); border-radius: var(--radius); display: none;">
+          ← Back
+        </button>
+        <button id="next-btn" class="px-6 py-2 text-sm font-bold text-white ml-auto" style="background: var(--accent); border-radius: var(--radius); opacity: 0.4; cursor: not-allowed;" disabled>
+          Next →
+        </button>
+      </div>
+    </div>
+
+    <!-- Result Container -->
+    <div id="result-container" class="hidden bg-white rounded-lg p-8 shadow-md border border-gray-100" style="border-radius: var(--radius-lg);">
+      <div class="text-center mb-6">
+        <div class="text-5xl mb-3" id="result-icon">🔍</div>
+        <h2 class="text-2xl font-bold mb-2" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">Your Recommended Service</h2>
+      </div>
+      <div class="p-6 rounded-lg mb-6" style="background: var(--primary); border-radius: var(--radius);">
+        <h3 id="result-service" class="text-xl font-bold text-white mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;"></h3>
+        <p id="result-urgency" class="text-sm font-semibold mb-3" style="color: var(--accent);"></p>
+        <p id="result-desc" class="text-sm leading-relaxed" style="color: rgba(255,255,255,0.8);"></p>
+      </div>
+      <div class="mb-6">
+        <h4 class="font-semibold mb-2" style="color: var(--primary);">What to do next:</h4>
+        <ul class="space-y-2 text-sm" style="color: var(--gray-600);">
+          <li class="flex items-start gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Call (504) 833-3716 for a free, confidential consultation
+          </li>
+          <li class="flex items-start gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Describe your situation — all conversations are 100% confidential
+          </li>
+          <li class="flex items-start gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            We'll match you with the right licensed PI for your case
+          </li>
+        </ul>
+      </div>
+      <div class="flex gap-3">
+        <a href="tel:+15048333716" class="flex-1 py-3 text-center font-bold text-white" style="background: var(--accent); border-radius: var(--radius);">
+          Call (504) 833-3716
+        </a>
+        <a href="/contact" class="flex-1 py-3 text-center font-bold border-2" style="border-color: var(--accent); color: var(--accent); border-radius: var(--radius);">
+          Contact Form
+        </a>
+      </div>
+      <button id="restart-btn" class="w-full mt-3 text-sm text-center py-2" style="color: var(--gray-500);">Take Quiz Again</button>
+    </div>
+
+    <div class="mt-10">
+      <CTABanner
+        title="Skip the Quiz — Just Talk to Us"
+        subtitle="Call (504) 833-3716 for a free confidential consultation. We'll assess your situation directly."
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const questions = [
+    {
+      text: "What best describes your situation?",
+      options: [
+        { label: "I suspect a spouse or partner of infidelity", value: "infidelity" },
+        { label: "I'm involved in a child custody dispute", value: "custody" },
+        { label: "I need to verify someone's background or identity", value: "background" },
+        { label: "I need to locate a person who's missing or avoiding contact", value: "skip" },
+        { label: "I have concerns about workplace misconduct or fraud", value: "corporate" },
+        { label: "Other / Not sure yet", value: "other" },
+      ]
+    },
+    {
+      text: "How long has this situation been going on?",
+      options: [
+        { label: "Just discovered it — this is urgent", value: "urgent" },
+        { label: "A few weeks, building concern", value: "moderate" },
+        { label: "Several months, I want documentation", value: "documentation" },
+        { label: "Ongoing legal matter — ongoing need", value: "legal" },
+      ]
+    },
+    {
+      text: "Do you have any evidence or documentation already?",
+      options: [
+        { label: "Yes, I have some evidence and need more", value: "some" },
+        { label: "No evidence — starting from scratch", value: "none" },
+        { label: "I have suspicions but need professional verification", value: "suspicion" },
+      ]
+    },
+    {
+      text: "Is this matter likely to involve legal proceedings?",
+      options: [
+        { label: "Yes — divorce, custody, or civil litigation", value: "legal_yes" },
+        { label: "Possibly — depends on what's found", value: "legal_maybe" },
+        { label: "No — I just need information for personal reasons", value: "legal_no" },
+      ]
+    },
+    {
+      text: "What is your approximate budget range?",
+      options: [
+        { label: "Under $500 — limited budget", value: "low" },
+        { label: "$500 – $1,500 — moderate", value: "medium" },
+        { label: "$1,500 – $3,000 — willing to invest for results", value: "high" },
+        { label: "Budget is flexible — results are most important", value: "flexible" },
+      ]
+    },
+    {
+      text: "How quickly do you need results?",
+      options: [
+        { label: "Immediately — within 24–48 hours", value: "asap" },
+        { label: "Within a week", value: "week" },
+        { label: "Within 2–4 weeks", value: "month" },
+        { label: "Timeline is flexible", value: "flexible" },
+      ]
+    },
+    {
+      text: "Where is the subject of the investigation primarily located?",
+      options: [
+        { label: "Metairie / Jefferson Parish", value: "metairie" },
+        { label: "New Orleans area", value: "nola" },
+        { label: "Louisiana (outside New Orleans area)", value: "louisiana" },
+        { label: "Out of state", value: "national" },
+      ]
+    },
+    {
+      text: "How did you hear about PI Metairie?",
+      options: [
+        { label: "Google search", value: "google" },
+        { label: "Referral from attorney or professional", value: "attorney" },
+        { label: "Word of mouth / friend", value: "wom" },
+        { label: "Other online search", value: "other" },
+      ]
+    }
+  ];
+
+  const serviceResults: Record<string, { icon: string; service: string; desc: string; urgencyLabel: string }> = {
+    infidelity: {
+      icon: "❤️",
+      service: "Infidelity / Marital Investigation",
+      desc: "Based on your answers, a discreet marital surveillance investigation is likely your best option. Our referred PIs specialize in gathering documented evidence of infidelity through professional covert surveillance in Metairie and Jefferson Parish.",
+      urgencyLabel: "Recommend starting within 1 week"
+    },
+    custody: {
+      icon: "⚖️",
+      service: "Child Custody Investigation",
+      desc: "Your situation calls for a child custody investigation. Our referred PIs work with Jefferson Parish family law matters, gathering evidence that is formatted for use in the 24th Judicial District Court. Acting promptly can protect your parental rights.",
+      urgencyLabel: "Legal urgency — recommend consulting immediately"
+    },
+    background: {
+      icon: "📋",
+      service: "Background Investigation",
+      desc: "A thorough background investigation will give you the verified information you need. Our referred PIs access comprehensive records beyond what's available online, delivering a detailed report within 24–72 hours.",
+      urgencyLabel: "Can typically be completed within 48–72 hours"
+    },
+    skip: {
+      icon: "📍",
+      service: "Skip Tracing / Locate Investigation",
+      desc: "You need professional skip tracing services. Licensed investigators use advanced database tools and field work to locate individuals across Jefferson Parish, Louisiana, and nationally. Most cases are resolved within 24–72 hours.",
+      urgencyLabel: "Recommend starting immediately for best results"
+    },
+    corporate: {
+      icon: "🏢",
+      service: "Corporate / Workplace Investigation",
+      desc: "Your situation calls for a professional workplace or corporate investigation. Our referred PIs handle employee misconduct, theft, fraud, and related business investigations discreetly and in compliance with Louisiana employment law.",
+      urgencyLabel: "Recommend consultation before more evidence is lost"
+    },
+    other: {
+      icon: "🔍",
+      service: "General PI Consultation",
+      desc: "Based on your answers, we recommend a free consultation to discuss your specific situation. The team will assess your needs and match you with the most appropriate licensed investigator in the Metairie area.",
+      urgencyLabel: "Free consultation available today"
+    }
+  };
+
+  let currentQ = 0;
+  const answers: string[] = [];
+
+  const qNum = document.getElementById('q-num');
+  const qPct = document.getElementById('q-pct');
+  const progressBar = document.getElementById('progress-bar');
+  const questionText = document.getElementById('question-text');
+  const optionsArea = document.getElementById('options-area');
+  const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement | null;
+  const nextBtn = document.getElementById('next-btn') as HTMLButtonElement | null;
+  const quizContainer = document.getElementById('quiz-container');
+  const resultContainer = document.getElementById('result-container');
+  const restartBtn = document.getElementById('restart-btn');
+
+  function renderQuestion() {
+    const q = questions[currentQ];
+    if (!qNum || !qPct || !progressBar || !questionText || !optionsArea || !prevBtn || !nextBtn) return;
+
+    qNum.textContent = String(currentQ + 1);
+    const pct = Math.round(((currentQ + 1) / 8) * 100);
+    qPct.textContent = pct + '%';
+    progressBar.style.width = pct + '%';
+
+    questionText.textContent = q.text;
+    optionsArea.innerHTML = '';
+
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option w-full text-left px-4 py-3 rounded border text-sm font-medium transition-all';
+      btn.style.cssText = `border-color: ${answers[currentQ] === opt.value ? 'var(--accent)' : '#e5e7eb'}; background: ${answers[currentQ] === opt.value ? 'rgba(196,154,60,0.08)' : '#fff'}; border-radius: var(--radius); color: var(--primary);`;
+      btn.textContent = opt.label;
+      btn.setAttribute('data-value', opt.value);
+      btn.setAttribute('data-index', String(i));
+
+      btn.addEventListener('click', () => {
+        answers[currentQ] = opt.value;
+        document.querySelectorAll('.quiz-option').forEach(el => {
+          (el as HTMLElement).style.borderColor = '#e5e7eb';
+          (el as HTMLElement).style.background = '#fff';
+        });
+        btn.style.borderColor = 'var(--accent)';
+        btn.style.background = 'rgba(196,154,60,0.08)';
+        if (nextBtn) {
+          nextBtn.style.opacity = '1';
+          nextBtn.style.cursor = 'pointer';
+          nextBtn.disabled = false;
+        }
+      });
+
+      optionsArea.appendChild(btn);
+    });
+
+    prevBtn.style.display = currentQ > 0 ? 'block' : 'none';
+
+    if (answers[currentQ]) {
+      nextBtn.style.opacity = '1';
+      nextBtn.style.cursor = 'pointer';
+      nextBtn.disabled = false;
+    } else {
+      nextBtn.style.opacity = '0.4';
+      nextBtn.style.cursor = 'not-allowed';
+      nextBtn.disabled = true;
+    }
+
+    nextBtn.textContent = currentQ === questions.length - 1 ? 'See My Results →' : 'Next →';
+  }
+
+  function showResult() {
+    // Determine service type from first answer
+    const firstAnswer = answers[0] || 'other';
+    const result = serviceResults[firstAnswer] || serviceResults['other'];
+    const isUrgent = answers[1] === 'urgent' || answers[5] === 'asap';
+
+    const resultService = document.getElementById('result-service');
+    const resultUrgency = document.getElementById('result-urgency');
+    const resultDesc = document.getElementById('result-desc');
+    const resultIcon = document.getElementById('result-icon');
+
+    if (resultService) resultService.textContent = result.service;
+    if (resultUrgency) resultUrgency.textContent = isUrgent ? '⚠️ URGENT — Recommend Immediate Action' : result.urgencyLabel;
+    if (resultDesc) resultDesc.textContent = result.desc;
+    if (resultIcon) resultIcon.textContent = result.icon;
+
+    if (quizContainer) quizContainer.classList.add('hidden');
+    if (resultContainer) resultContainer.classList.remove('hidden');
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      if (nextBtn.disabled) return;
+      if (currentQ < questions.length - 1) {
+        currentQ++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      if (currentQ > 0) {
+        currentQ--;
+        renderQuestion();
+      }
+    });
+  }
+
+  if (restartBtn) {
+    restartBtn.addEventListener('click', () => {
+      currentQ = 0;
+      answers.length = 0;
+      if (quizContainer) quizContainer.classList.remove('hidden');
+      if (resultContainer) resultContainer.classList.add('hidden');
+      renderQuestion();
+    });
+  }
+
+  renderQuestion();
+</script>

@@ -1,0 +1,72 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonical?: string;
+  schema?: Record<string, unknown>;
+}
+
+const { title, description, image, canonical, schema } = Astro.props;
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "PI Metairie",
+  "description": "Professional private investigator referral service in Metairie, Louisiana. Connecting Jefferson Parish residents with licensed, LSBPIE-regulated investigators.",
+  "url": "https://privateinvestigatormetairie.com",
+  "telephone": "+15048333716",
+  "email": "info@privateinvestigatormetairie.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "One Galleria Blvd., Suite 1900",
+    "addressLocality": "Metairie",
+    "addressRegion": "LA",
+    "postalCode": "70001",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 29.9966,
+    "longitude": -90.1974
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "08:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "09:00",
+      "closes": "17:00"
+    }
+  ],
+  "areaServed": ["Metairie", "Kenner", "Harahan", "Gretna", "Harvey", "Marrero", "New Orleans"],
+  "priceRange": "$$"
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} image={image} canonical={canonical} />
+    <SchemaMarkup schema={localBusinessSchema} />
+    {schema && <SchemaMarkup schema={schema} />}
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

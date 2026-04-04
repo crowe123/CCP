@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Tools', href: '/tools' },
+  { label: 'Cost Calculator', href: '/tools/cost-calculator' },
+];
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PI Cost Calculator — Metairie, Louisiana",
+  "url": "https://privateinvestigatormetairie.com/tools/cost-calculator",
+  "description": "Estimate private investigator costs in Metairie and Louisiana. Enter case type, hours, and urgency to get a realistic cost range.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+};
+---
+
+<BaseLayout
+  title="PI Cost Calculator — Metairie, Louisiana | PI Metairie"
+  description="Estimate private investigator costs in Metairie, LA. Enter your case type, estimated hours, and urgency to get a cost range. Free tool."
+  schema={webAppSchema}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <section style="background: var(--primary);" class="py-12">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold text-white mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">PI Cost Calculator</h1>
+      <p class="text-lg" style="color: rgba(255,255,255,0.8);">Estimate investigation costs for Metairie and the New Orleans area based on your case details.</p>
+    </div>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="bg-white rounded-lg p-8 shadow-md border border-gray-100" style="border-radius: var(--radius-lg);">
+
+      <!-- Calculator Island -->
+      <div id="pi-calculator">
+        <div class="space-y-6">
+          <!-- Case Type -->
+          <div>
+            <label for="case-type" class="block text-sm font-semibold mb-2" style="color: var(--primary);">Investigation Type</label>
+            <select id="case-type" class="w-full px-4 py-3 border border-gray-200 rounded text-gray-700" style="border-radius: var(--radius);">
+              <option value="surveillance" data-min="85" data-max="130">Surveillance</option>
+              <option value="infidelity" data-min="90" data-max="140">Infidelity Investigation</option>
+              <option value="custody" data-min="90" data-max="140">Child Custody Investigation</option>
+              <option value="background" data-min="75" data-max="150">Background Check</option>
+              <option value="skip" data-min="80" data-max="120">Skip Tracing</option>
+              <option value="insurance" data-min="85" data-max="135">Insurance Fraud</option>
+              <option value="missing" data-min="90" data-max="150">Missing Persons</option>
+              <option value="corporate" data-min="100" data-max="150">Corporate Investigation</option>
+            </select>
+          </div>
+
+          <!-- Hours Slider -->
+          <div>
+            <label for="hours-slider" class="block text-sm font-semibold mb-2" style="color: var(--primary);">
+              Estimated Hours: <span id="hours-display" class="font-bold" style="color: var(--accent);">12</span> hours
+            </label>
+            <input
+              type="range"
+              id="hours-slider"
+              min="4"
+              max="40"
+              value="12"
+              step="2"
+              class="w-full"
+              style="accent-color: var(--accent);"
+            />
+            <div class="flex justify-between text-xs mt-1" style="color: var(--gray-500);">
+              <span>4 hrs (minimum)</span>
+              <span>40 hrs (complex)</span>
+            </div>
+          </div>
+
+          <!-- Urgency -->
+          <div>
+            <label class="block text-sm font-semibold mb-2" style="color: var(--primary);">Urgency</label>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="flex items-center gap-3 p-3 rounded border cursor-pointer urgency-option" style="border-color: var(--accent); border-radius: var(--radius);">
+                <input type="radio" name="urgency" value="normal" checked class="accent-accent" />
+                <div>
+                  <p class="font-semibold text-sm" style="color: var(--primary);">Standard</p>
+                  <p class="text-xs" style="color: var(--gray-500);">Normal timeline</p>
+                </div>
+              </label>
+              <label class="flex items-center gap-3 p-3 rounded border cursor-pointer urgency-option" style="border-color: #e5e7eb; border-radius: var(--radius);">
+                <input type="radio" name="urgency" value="rush" class="accent-accent" />
+                <div>
+                  <p class="font-semibold text-sm" style="color: var(--primary);">Rush</p>
+                  <p class="text-xs" style="color: var(--gray-500);">+25% for urgent cases</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Calculate Button -->
+          <button
+            id="calculate-btn"
+            class="w-full py-4 font-bold text-white text-lg"
+            style="background: var(--accent); border-radius: var(--radius); border: none; cursor: pointer;"
+          >
+            Calculate Estimated Cost
+          </button>
+        </div>
+
+        <!-- Result -->
+        <div id="calc-result" class="hidden mt-8 p-6 rounded-lg" style="background: var(--primary); border-radius: var(--radius-lg);">
+          <h3 class="text-lg font-bold text-white mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">Estimated Cost Range</h3>
+          <p id="result-range" class="text-4xl font-bold mb-3" style="color: var(--accent); font-family: 'Plus Jakarta Sans', sans-serif;"></p>
+          <p id="result-detail" class="text-sm mb-4" style="color: rgba(255,255,255,0.75);"></p>
+          <p class="text-xs italic" style="color: rgba(255,255,255,0.55);">
+            Estimates are based on typical Metairie/New Orleans area PI rates. Actual costs vary by case complexity, investigator, and specific requirements. Get a precise quote during your free consultation.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info cards -->
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {[
+        { label: 'Hourly Rate Range', value: '$85–$150/hr', desc: 'Metairie & New Orleans area' },
+        { label: 'Minimum Engagement', value: '4 hours', desc: 'Most investigators require 4-hr minimum' },
+        { label: 'Retainer Typical', value: '$500–$1,500', desc: 'Paid upfront, billed against' },
+      ].map(item => (
+        <div class="text-center p-4 rounded-lg" style="background: var(--bg-alt); border-radius: var(--radius);">
+          <p class="text-xl font-bold mb-1" style="color: var(--accent); font-family: 'Plus Jakarta Sans', sans-serif;">{item.value}</p>
+          <p class="text-sm font-semibold mb-1" style="color: var(--primary);">{item.label}</p>
+          <p class="text-xs" style="color: var(--gray-500);">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10">
+      <CTABanner
+        title="Get a Precise Quote"
+        subtitle="Our free consultation gives you an exact estimate for your specific situation. No obligation."
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const slider = document.getElementById('hours-slider') as HTMLInputElement | null;
+  const display = document.getElementById('hours-display');
+  const btn = document.getElementById('calculate-btn');
+  const resultDiv = document.getElementById('calc-result');
+  const resultRange = document.getElementById('result-range');
+  const resultDetail = document.getElementById('result-detail');
+
+  if (slider && display) {
+    slider.addEventListener('input', () => {
+      if (display) display.textContent = slider.value;
+    });
+  }
+
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const caseTypeEl = document.getElementById('case-type') as HTMLSelectElement | null;
+      const hoursEl = document.getElementById('hours-slider') as HTMLInputElement | null;
+      const urgencyEl = document.querySelector('input[name="urgency"]:checked') as HTMLInputElement | null;
+
+      if (!caseTypeEl || !hoursEl || !urgencyEl || !resultDiv || !resultRange || !resultDetail) return;
+
+      const selectedOption = caseTypeEl.options[caseTypeEl.selectedIndex];
+      const minRate = parseInt(selectedOption.getAttribute('data-min') || '85');
+      const maxRate = parseInt(selectedOption.getAttribute('data-max') || '130');
+      const hours = parseInt(hoursEl.value);
+      const isRush = urgencyEl.value === 'rush';
+      const rushMultiplier = isRush ? 1.25 : 1;
+
+      const minCost = Math.round(minRate * hours * rushMultiplier / 50) * 50;
+      const maxCost = Math.round(maxRate * hours * rushMultiplier / 50) * 50;
+
+      resultRange.textContent = `$${minCost.toLocaleString()} – $${maxCost.toLocaleString()}`;
+      resultDetail.textContent = `Based on ${hours} hours at $${minRate}–$${maxRate}/hr${isRush ? ' with 25% rush surcharge' : ''}. This is an estimate — actual costs depend on case complexity and investigator.`;
+
+      resultDiv.classList.remove('hidden');
+      resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+
+  // Urgency radio styling
+  const radios = document.querySelectorAll('input[name="urgency"]');
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      document.querySelectorAll('.urgency-option').forEach(el => {
+        (el as HTMLElement).style.borderColor = '#e5e7eb';
+      });
+      const parent = (radio as HTMLElement).closest('.urgency-option') as HTMLElement | null;
+      if (parent) parent.style.borderColor = 'var(--accent)';
+    });
+  });
+</script>

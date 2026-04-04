@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts
+    .filter(post => post.id && post.id !== '')
+    .map(post => ({
+      params: { slug: post.id },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const allPosts = await getCollection('blog');
+const relatedPosts = allPosts
+  .filter(p => p.id !== post.id)
+  .slice(0, 4);
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Articles', href: '/articles' },
+  { label: post.data.title, href: `/articles/${post.id}` },
+];
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "datePublished": post.data.pubDate,
+  "publisher": {
+    "@type": "Organization",
+    "name": "PI Metairie",
+    "url": "https://privateinvestigatormetairie.com"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://privateinvestigatormetairie.com/articles/${post.id}`
+  }
+};
+---
+
+<BaseLayout
+  title={`${post.data.title} | PI Metairie`}
+  description={post.data.description}
+  image={post.data.image}
+  schema={articleSchema}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
+
+      <!-- Main Article -->
+      <article class="lg:col-span-3">
+        <!-- Featured Image -->
+        {post.data.image && (
+          <div class="mb-8 rounded-lg overflow-hidden shadow-md" style="max-height: 400px;">
+            <img
+              src={post.data.image}
+              alt={post.data.title}
+              class="w-full object-cover"
+              style="max-height: 400px;"
+            />
+          </div>
+        )}
+
+        <!-- Header -->
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold mb-4" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.2;">
+            {post.data.title}
+          </h1>
+          <p class="text-sm" style="color: var(--gray-500);">
+            Published {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            {post.data.keywords && <> · <span>{post.data.keywords}</span></>}
+          </p>
+        </header>
+
+        <!-- Top CTA Banner -->
+        <CTABanner
+          title="Need a Licensed PI in Metairie?"
+          subtitle="Confidential consultations — no obligation."
+        />
+
+        <!-- Article Content -->
+        <div class="prose prose-lg max-w-none mt-8">
+          <Content />
+        </div>
+
+        <!-- Middle CTA Banner -->
+        <CTABanner
+          title="Questions About Your Case?"
+          subtitle="Call (504) 833-3716 for a free confidential consultation. Available evenings and weekends."
+        />
+
+        <!-- Bottom CTA Banner -->
+        <CTABanner
+          title="Ready to Take Action?"
+          subtitle="Connect with a licensed private investigator in Metairie today. No obligation."
+        />
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <div class="sticky top-24 space-y-6">
+          <!-- Quick Contact -->
+          <div class="rounded-lg p-5" style="background: var(--primary); border-radius: var(--radius);">
+            <h3 class="text-base font-bold text-white mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">Free Consultation</h3>
+            <p class="text-sm mb-4" style="color: rgba(255,255,255,0.75);">Get a free, confidential consultation with a licensed PI in Metairie.</p>
+            <a
+              href="tel:+15048333716"
+              class="block text-center py-2 px-4 font-bold text-white text-sm mb-2"
+              style="background: var(--accent); border-radius: var(--radius);"
+            >
+              (504) 833-3716
+            </a>
+            <a
+              href="/contact"
+              class="block text-center py-2 px-4 font-bold text-sm border"
+              style="border-color: var(--accent); color: var(--accent); border-radius: var(--radius);"
+            >
+              Contact Form
+            </a>
+          </div>
+
+          <!-- Related Articles -->
+          {relatedPosts.length > 0 && (
+            <div>
+              <h3 class="text-sm font-bold uppercase tracking-wider mb-3" style="color: var(--primary);">Related Articles</h3>
+              <ul class="space-y-3">
+                {relatedPosts.map(related => (
+                  <li>
+                    <a
+                      href={`/articles/${related.id}`}
+                      class="text-sm font-medium hover:text-accent transition-colors block"
+                      style="color: var(--primary);"
+                    >
+                      → {related.data.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- Services Quick Links -->
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-wider mb-3" style="color: var(--primary);">Services</h3>
+            <ul class="space-y-2">
+              {[
+                ['Surveillance', '/services#surveillance'],
+                ['Infidelity Investigation', '/services#infidelity'],
+                ['Child Custody', '/services#child-custody'],
+                ['Background Checks', '/services#background-checks'],
+                ['Skip Tracing', '/services#skip-tracing'],
+                ['Insurance Fraud', '/services#insurance-fraud'],
+              ].map(([label, href]) => (
+                <li>
+                  <a href={href} class="text-sm hover:text-accent transition-colors" style="color: var(--gray-600);">{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

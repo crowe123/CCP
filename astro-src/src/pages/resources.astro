@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LeadCaptureForm from '../components/LeadCaptureForm.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Resources', href: '/resources' },
+];
+
+const resourceCards = [
+  {
+    title: 'How to Hire a Private Investigator in Metairie',
+    desc: 'Step-by-step guide to finding, vetting, and hiring the right PI for your situation in Jefferson Parish.',
+    href: '/articles/how-to-hire-private-investigator-metairie',
+  },
+  {
+    title: 'How to Verify a PI License in Louisiana',
+    desc: "Learn how to check if a private investigator is properly licensed by the LSBPIE before hiring.",
+    href: '/articles/verify-pi-license-louisiana',
+  },
+  {
+    title: 'Private Investigator Cost Guide for Metairie',
+    desc: 'Understand PI rates, billing structures, and what to expect to pay for investigation services in the New Orleans area.',
+    href: '/articles/private-investigator-cost-new-orleans',
+  },
+  {
+    title: 'Surveillance Laws in Louisiana',
+    desc: 'What a PI can and cannot legally do in Louisiana — know your rights and theirs.',
+    href: '/articles/surveillance-laws-louisiana-pi',
+  },
+];
+---
+
+<BaseLayout
+  title="Free PI Resources for Metairie Residents | PI Metairie"
+  description="Free resources for Metairie residents: Louisiana PI hiring checklist, guides, and articles on private investigation laws and services in Jefferson Parish."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <section style="background: var(--primary);" class="py-14">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold text-white mb-4" style="font-family: 'Plus Jakarta Sans', sans-serif;">Free PI Resources for Metairie Residents</h1>
+      <p class="text-lg" style="color: rgba(255,255,255,0.8);">Guides, checklists, and expert articles to help you navigate private investigation services in Louisiana.</p>
+    </div>
+  </section>
+
+  <!-- Featured Resource: Gated Checklist -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      <div>
+        <div class="inline-block px-3 py-1 rounded text-xs font-bold mb-4" style="background: rgba(196,154,60,0.15); color: var(--accent);">FREE DOWNLOAD</div>
+        <h2 class="text-3xl font-bold mb-4" style="color: var(--primary);">Louisiana Private Investigator Hiring Checklist</h2>
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+          Don't hire a PI without reading this first. This comprehensive checklist covers everything you need to know before engaging a private investigator in Louisiana:
+        </p>
+        <ul class="space-y-2 mb-6">
+          {[
+            'How to verify LSBPIE license status',
+            'Questions to ask before signing a contract',
+            'Red flags that indicate an unlicensed or unethical PI',
+            'Understanding billing and retainer agreements',
+            'What documentation to expect from your investigator',
+            'How to assess investigator qualifications for your case type',
+            'Louisiana-specific legal requirements and restrictions',
+          ].map(item => (
+            <li class="flex items-start gap-2 text-sm" style="color: var(--gray-600);">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <p class="text-sm italic" style="color: var(--gray-500);">Submit the form to unlock your free download link.</p>
+      </div>
+
+      <div>
+        <div class="bg-white rounded-lg p-8 shadow-md border border-gray-100" style="border-radius: var(--radius-lg);">
+          <h3 class="text-xl font-bold mb-4" style="color: var(--primary);">Get Your Free Checklist</h3>
+          <div id="checklist-form-wrapper">
+            <form
+              id="checklist-form"
+              action="https://formspree.io/f/xpzgwovk"
+              method="POST"
+              class="space-y-4"
+            >
+              <div>
+                <label for="cf-name" class="block text-sm font-semibold mb-1" style="color: var(--primary);">Full Name <span class="text-red-500">*</span></label>
+                <input type="text" id="cf-name" name="name" required placeholder="Your name" class="w-full px-4 py-3 border border-gray-200 rounded text-gray-700" style="border-radius: var(--radius);" />
+              </div>
+              <div>
+                <label for="cf-email" class="block text-sm font-semibold mb-1" style="color: var(--primary);">Email Address <span class="text-red-500">*</span></label>
+                <input type="email" id="cf-email" name="email" required placeholder="you@email.com" class="w-full px-4 py-3 border border-gray-200 rounded text-gray-700" style="border-radius: var(--radius);" />
+              </div>
+              <input type="hidden" name="_subject" value="Checklist Download Request" />
+              <button type="submit" class="w-full py-3 px-6 font-bold text-white" style="background: var(--accent); border-radius: var(--radius); border: none; cursor: pointer;">
+                Unlock Free Checklist
+              </button>
+            </form>
+          </div>
+          <div id="checklist-success" class="hidden text-center py-6">
+            <div class="text-4xl mb-3">✓</div>
+            <h4 class="text-xl font-bold mb-2" style="color: var(--primary);">Here's Your Checklist!</h4>
+            <p class="text-sm mb-4" style="color: var(--gray-600);">Click below to download your free Louisiana PI Hiring Checklist (PDF).</p>
+            <a
+              href="/downloads/louisiana-pi-hiring-checklist.pdf"
+              class="inline-block px-6 py-3 font-bold text-white"
+              style="background: var(--accent); border-radius: var(--radius);"
+            >
+              Download PDF Checklist
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resource Cards -->
+  <section style="background: var(--bg-alt);" class="py-14">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold mb-8" style="color: var(--primary);">Helpful Articles & Guides</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {resourceCards.map(card => (
+          <a href={card.href} class="bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all group" style="border-radius: var(--radius);">
+            <h3 class="font-bold mb-2 group-hover:text-accent transition-colors" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">{card.title}</h3>
+            <p class="text-sm leading-relaxed mb-3" style="color: var(--gray-500);">{card.desc}</p>
+            <span class="text-sm font-semibold" style="color: var(--accent);">Read Article →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('checklist-form') as HTMLFormElement | null;
+  const success = document.getElementById('checklist-success');
+  if (form && success) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          form.classList.add('hidden');
+          success.classList.remove('hidden');
+        }
+      } catch {}
+    });
+  }
+</script>

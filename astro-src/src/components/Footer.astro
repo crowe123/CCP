@@ -1,0 +1,95 @@
+---
+import { siteConfig } from '../config';
+---
+
+<footer style="background: var(--primary); color: rgba(255,255,255,0.8);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+      <!-- About -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="32" height="32" aria-hidden="true">
+            <circle cx="17" cy="17" r="10" fill="none" stroke="#c49a3c" stroke-width="3"/>
+            <line x1="24.5" y1="24.5" x2="36" y2="36" stroke="#c49a3c" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="17" cy="17" r="5" fill="#c49a3c" opacity="0.3"/>
+          </svg>
+          <span class="text-xl font-bold text-white" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+            PI <span style="color: var(--accent);">Metairie</span>
+          </span>
+        </div>
+        <p class="text-sm leading-relaxed mb-4" style="color: rgba(255,255,255,0.65);">
+          Connecting Metairie and Jefferson Parish residents with licensed, LSBPIE-regulated private investigators for confidential, professional service.
+        </p>
+        <p class="text-sm" style="color: rgba(255,255,255,0.5);">
+          {siteConfig.address}
+        </p>
+        <a href={`tel:${siteConfig.phone}`} class="mt-2 inline-block text-sm font-semibold" style="color: var(--accent);">
+          {siteConfig.phoneDisplay}
+        </a>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-sm font-bold uppercase tracking-wider mb-4" style="color: var(--accent);">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Home</a></li>
+          <li><a href="/services" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Services</a></li>
+          <li><a href="/service-areas" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Service Areas</a></li>
+          <li><a href="/articles" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Articles</a></li>
+          <li><a href="/tools" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Tools</a></li>
+          <li><a href="/resources" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Resources</a></li>
+          <li><a href="/about" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">About</a></li>
+          <li><a href="/contact" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Contact</a></li>
+          <li><a href="/privacy-policy" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Privacy Policy</a></li>
+          <li><a href="/terms-of-service" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <!-- Blog -->
+      <div>
+        <h3 class="text-sm font-bold uppercase tracking-wider mb-4" style="color: var(--accent);">Recent Articles</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/articles/how-to-hire-private-investigator-metairie" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">How to Hire a PI in Metairie</a></li>
+          <li><a href="/articles/verify-pi-license-louisiana" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Verify a PI License in Louisiana</a></li>
+          <li><a href="/articles/private-investigator-cost-new-orleans" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">PI Cost in New Orleans Area</a></li>
+          <li><a href="/articles/cheating-spouse-investigation-what-to-expect" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Cheating Spouse Investigation</a></li>
+          <li><a href="/articles/child-custody-investigation-jefferson-parish" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Child Custody Investigation</a></li>
+          <li><a href="/articles/surveillance-laws-louisiana-pi" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">Surveillance Laws in Louisiana</a></li>
+        </ul>
+      </div>
+
+      <!-- Service Areas -->
+      <div>
+        <h3 class="text-sm font-bold uppercase tracking-wider mb-4" style="color: var(--accent);">Service Areas</h3>
+        <ul class="space-y-2 text-sm">
+          {siteConfig.serviceAreas.map(city => (
+            <li>
+              <a href={`/service-areas/${city.toLowerCase()}`} class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.7);">
+                Private Investigator {city}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-6">
+          <h3 class="text-sm font-bold uppercase tracking-wider mb-3" style="color: var(--accent);">Hours</h3>
+          <p class="text-xs" style="color: rgba(255,255,255,0.6);">Mon–Fri: 8am–8pm</p>
+          <p class="text-xs" style="color: rgba(255,255,255,0.6);">Saturday: 9am–5pm</p>
+          <p class="text-xs" style="color: rgba(255,255,255,0.6);">Emergency: 24/7</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div style="border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <p class="text-xs" style="color: rgba(255,255,255,0.5);">
+        © {new Date().getFullYear()} PI Metairie — privateinvestigatormetairie.com
+      </p>
+      <p class="text-xs text-center" style="color: rgba(255,255,255,0.4);">
+        {siteConfig.disclaimer}
+      </p>
+    </div>
+  </div>
+</footer>

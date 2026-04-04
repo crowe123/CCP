@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABanner from '../../components/CTABanner.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Tools', href: '/tools' },
+];
+---
+
+<BaseLayout
+  title="Free PI Tools | Cost Calculator & Investigation Quiz | PI Metairie"
+  description="Free tools for Metairie residents: estimate PI investigation costs and take our quiz to identify the right investigation service for your situation."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <section style="background: var(--primary);" class="py-14">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold text-white mb-4" style="font-family: 'Plus Jakarta Sans', sans-serif;">Free PI Tools</h1>
+      <p class="text-lg" style="color: rgba(255,255,255,0.8);">Use our free tools to estimate costs and find out which investigation service is right for your situation.</p>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <a href="/tools/cost-calculator" class="group bg-white rounded-lg p-8 shadow-sm border border-gray-100 hover:shadow-md transition-all" style="border-radius: var(--radius-lg);">
+        <div class="w-14 h-14 rounded-full flex items-center justify-center mb-4" style="background: rgba(196,154,60,0.15);">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold mb-2 group-hover:text-accent transition-colors" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">PI Cost Calculator</h2>
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">Estimate the cost of your private investigation based on case type, estimated hours, and urgency. Get a realistic cost range before your consultation.</p>
+        <span class="text-sm font-semibold" style="color: var(--accent);">Try the Calculator →</span>
+      </a>
+
+      <a href="/tools/assessment-quiz" class="group bg-white rounded-lg p-8 shadow-sm border border-gray-100 hover:shadow-md transition-all" style="border-radius: var(--radius-lg);">
+        <div class="w-14 h-14 rounded-full flex items-center justify-center mb-4" style="background: rgba(196,154,60,0.15);">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--accent);">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold mb-2 group-hover:text-accent transition-colors" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">Investigation Assessment Quiz</h2>
+        <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">Not sure what type of investigation you need? Take our 8-question quiz to identify the right service and urgency level for your situation.</p>
+        <span class="text-sm font-semibold" style="color: var(--accent);">Take the Quiz →</span>
+      </a>
+    </div>
+
+    <div class="mt-12">
+      <CTABanner
+        title="Ready to Talk to a Real Investigator?"
+        subtitle="Our tools give estimates, but nothing replaces a free, confidential consultation with a licensed PI."
+      />
+    </div>
+  </section>
+</BaseLayout>

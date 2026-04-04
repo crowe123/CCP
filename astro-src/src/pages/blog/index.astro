@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Articles', href: '/articles' },
+];
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => {
+  return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+});
+---
+
+<BaseLayout
+  title="Private Investigator Articles & Guides for Metairie, LA | PI Metairie"
+  description="Expert articles and guides on private investigation services, laws, and best practices in Metairie, Louisiana and Jefferson Parish."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <section style="background: var(--primary);" class="py-14">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold text-white mb-4" style="font-family: 'Plus Jakarta Sans', sans-serif;">Private Investigator Articles & Guides for Metairie, LA</h1>
+      <p class="text-lg" style="color: rgba(255,255,255,0.8);">Expert guides on Louisiana PI law, investigation types, and how to protect yourself and your family.</p>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortedPosts.map(post => (
+        <article class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all group" style="border-radius: var(--radius);">
+          {post.data.image && (
+            <div class="h-44 overflow-hidden">
+              <img
+                src={post.data.image}
+                alt={post.data.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+          )}
+          <div class="p-5">
+            <p class="text-xs mb-2" style="color: var(--gray-500);">
+              {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
+            <h2 class="text-lg font-bold mb-2 group-hover:text-accent transition-colors" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.3;">
+              {post.data.title}
+            </h2>
+            <p class="text-sm leading-relaxed mb-4" style="color: var(--gray-500);">{post.data.description}</p>
+            <a href={`/articles/${post.id}`} class="text-sm font-semibold" style="color: var(--accent);">Read More →</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

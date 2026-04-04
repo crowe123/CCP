@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+];
+---
+
+<BaseLayout
+  title="About PI Metairie | Licensed PI Referral Service in Jefferson Parish"
+  description="This service connects residents of Metairie and Jefferson Parish with licensed, LSBPIE-regulated private investigators. Learn how the referral service works."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
+
+  <!-- Hero -->
+  <section style="background: var(--primary);" class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl font-bold text-white mb-4" style="font-family: 'Plus Jakarta Sans', sans-serif;">About PI Metairie</h1>
+      <p class="text-lg" style="color: rgba(255,255,255,0.8);">A trusted private investigator referral service serving Metairie and Jefferson Parish since 2010.</p>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+
+    <!-- Brand Story -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-4" style="color: var(--primary);">About This Service</h2>
+      <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+        PI Metairie is a professional referral service that connects individuals, families, and businesses in Metairie and Jefferson Parish with licensed, regulated private investigators. This is not a private investigation agency — it is a specialized matching service that ensures every client is connected with a qualified professional who is the right fit for their specific situation.
+      </p>
+      <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+        Finding a trustworthy private investigator in Louisiana can be challenging. The industry has its share of unlicensed operators and questionable practices. PI Metairie was created specifically to solve this problem — giving Metairie residents a reliable resource for connecting with investigators who are properly licensed by the Louisiana State Board of Private Investigator Examiners (LSBPIE) and have demonstrated track records of professionalism.
+      </p>
+      <p class="text-base leading-relaxed" style="color: var(--gray-600);">
+        Every investigator in the network has been vetted for current LSBPIE licensure, professional conduct, area expertise, and client satisfaction. Only investigators who uphold the highest professional standards are referred.
+      </p>
+    </div>
+
+    <!-- How Referral Works -->
+    <div class="mb-12 bg-white rounded-lg p-8 shadow-sm border border-gray-100" style="border-radius: var(--radius-lg);">
+      <h2 class="text-2xl font-bold mb-6" style="color: var(--primary);">How the Referral Service Works</h2>
+      <div class="space-y-6">
+        {[
+          {
+            step: '1',
+            title: 'Free Consultation',
+            desc: 'Call or submit the contact form. The situation, needs, budget, and timeline are discussed in a completely confidential conversation. There is no obligation and no charge for this consultation.'
+          },
+          {
+            step: '2',
+            title: 'Investigator Matching',
+            desc: "The network of licensed investigators is reviewed to identify the best fit for each case, considering specialization, geographic proximity, availability, and experience relevant to the specific situation."
+          },
+          {
+            step: '3',
+            title: 'Introduction & Engagement',
+            desc: "Clients are connected directly to the matched investigator. From there, clients work with the investigator directly, review credentials, discuss their approach, and enter into an engagement agreement."
+          },
+          {
+            step: '4',
+            title: 'Investigation & Results',
+            desc: "Your investigator conducts the investigation according to the agreed plan. They deliver findings directly to you in a documented, court-admissible format. You maintain direct communication with your investigator throughout."
+          }
+        ].map(step => (
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-lg" style="background: var(--accent);">
+              {step.step}
+            </div>
+            <div>
+              <h3 class="font-bold mb-1" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">{step.title}</h3>
+              <p class="text-sm leading-relaxed" style="color: var(--gray-600);">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- LSBPIE Section -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-4" style="color: var(--primary);">What is the LSBPIE?</h2>
+      <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+        The Louisiana State Board of Private Investigator Examiners (LSBPIE) is the state regulatory body that licenses and oversees all private investigators operating in Louisiana. Established under Louisiana Revised Statute 37:3501 et seq., the LSBPIE sets education, training, and conduct requirements for licensed PIs.
+      </p>
+      <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+        To obtain a Louisiana PI license, an applicant must have a minimum of three years' experience in investigative work (or equivalent education), pass a written examination, pass a background check, and maintain liability insurance. Licensed PIs must renew their licenses regularly and comply with the LSBPIE's code of conduct.
+      </p>
+      <p class="text-base leading-relaxed" style="color: var(--gray-600);">
+        It is illegal to perform private investigation work for compensation in Louisiana without a valid LSBPIE license. You can verify any PI's license status at the LSBPIE's official website. All clients are encouraged to verify the license of any PI they hire — including those referred through this service.
+      </p>
+    </div>
+
+    <!-- Trust Signals Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+      {[
+        { stat: '100%', label: 'LSBPIE Licensed' },
+        { stat: '15+', label: 'Years of Experience' },
+        { stat: '24/7', label: 'Emergency Available' },
+        { stat: 'Free', label: 'Initial Consultation' },
+      ].map(item => (
+        <div class="text-center p-4 rounded-lg" style="background: var(--bg-alt); border-radius: var(--radius);">
+          <p class="text-3xl font-bold mb-1" style="color: var(--accent); font-family: 'Plus Jakarta Sans', sans-serif;">{item.stat}</p>
+          <p class="text-sm font-medium" style="color: var(--primary);">{item.label}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Why Use Referral -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-4" style="color: var(--primary);">Why Use a PI Referral Service?</h2>
+      <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+        Most people have never hired a private investigator before. The process can feel overwhelming — searching online, reading reviews of unknown quality, trying to assess credentials, and hoping you've made the right choice. A bad PI can waste thousands of dollars, gather inadmissible evidence, or worse, tip off a subject and ruin your case.
+      </p>
+      <p class="text-base leading-relaxed mb-4" style="color: var(--gray-600);">
+        PI Metairie solves this problem. The vetting has already been done — verifying licenses, checking professional records, reviewing client feedback, and assessing investigator expertise in specific case types. Clients get the benefit of that research without any charge for the matching service itself.
+      </p>
+      <p class="text-base leading-relaxed" style="color: var(--gray-600);">
+        The service covers Metairie, Kenner, Harahan, River Ridge, Gretna, Harvey, Marrero, and the surrounding areas of Jefferson Parish and Greater New Orleans.
+      </p>
+    </div>
+
+    <CTABanner
+      title="Ready to Find the Right Investigator?"
+      subtitle="Free confidential consultation. No obligation. Get connected with the right licensed PI in Metairie."
+    />
+  </section>
+</BaseLayout>

@@ -1,0 +1,141 @@
+---
+const formEndpoint = 'https://formspree.io/f/xkopjyve';
+---
+
+<div class="lead-form-wrapper">
+  <form
+    id="lead-form"
+    action={formEndpoint}
+    method="POST"
+    class="space-y-4"
+  >
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label for="lf-name" class="block text-sm font-semibold mb-1" style="color: var(--primary);">Full Name <span class="text-red-500">*</span></label>
+        <input
+          type="text"
+          id="lf-name"
+          name="name"
+          required
+          placeholder="Your name"
+          class="w-full px-4 py-3 border border-gray-200 rounded focus:outline-none focus:ring-2 text-gray-700"
+          style="border-radius: var(--radius); focus-ring-color: var(--accent);"
+        />
+      </div>
+      <div>
+        <label for="lf-phone" class="block text-sm font-semibold mb-1" style="color: var(--primary);">Phone Number</label>
+        <input
+          type="tel"
+          id="lf-phone"
+          name="phone"
+          placeholder="(504) 000-0000"
+          class="w-full px-4 py-3 border border-gray-200 rounded focus:outline-none focus:ring-2 text-gray-700"
+          style="border-radius: var(--radius);"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label for="lf-email" class="block text-sm font-semibold mb-1" style="color: var(--primary);">Email Address <span class="text-red-500">*</span></label>
+        <input
+          type="email"
+          id="lf-email"
+          name="email"
+          required
+          placeholder="you@email.com"
+          class="w-full px-4 py-3 border border-gray-200 rounded focus:outline-none focus:ring-2 text-gray-700"
+          style="border-radius: var(--radius);"
+        />
+      </div>
+      <div>
+        <label for="lf-location" class="block text-sm font-semibold mb-1" style="color: var(--primary);">Location / ZIP Code</label>
+        <input
+          type="text"
+          id="lf-location"
+          name="location"
+          placeholder="Metairie, LA 70001"
+          class="w-full px-4 py-3 border border-gray-200 rounded focus:outline-none focus:ring-2 text-gray-700"
+          style="border-radius: var(--radius);"
+        />
+      </div>
+    </div>
+
+    <div>
+      <label for="lf-situation" class="block text-sm font-semibold mb-1" style="color: var(--primary);">Describe Your Situation</label>
+      <textarea
+        id="lf-situation"
+        name="situation"
+        rows="4"
+        placeholder="Describe the situation briefly. All inquiries are 100% confidential."
+        class="w-full px-4 py-3 border border-gray-200 rounded focus:outline-none focus:ring-2 text-gray-700 resize-vertical"
+        style="border-radius: var(--radius);"
+      ></textarea>
+    </div>
+
+    <div>
+      <label for="lf-besttime" class="block text-sm font-semibold mb-1" style="color: var(--primary);">Best Time to Call</label>
+      <select
+        id="lf-besttime"
+        name="best_time"
+        class="w-full px-4 py-3 border border-gray-200 rounded focus:outline-none focus:ring-2 text-gray-700"
+        style="border-radius: var(--radius);"
+      >
+        <option value="">Select a time</option>
+        <option value="Morning (8am–12pm)">Morning (8am–12pm)</option>
+        <option value="Afternoon (12pm–5pm)">Afternoon (12pm–5pm)</option>
+        <option value="Evening (5pm–8pm)">Evening (5pm–8pm)</option>
+        <option value="Anytime">Anytime</option>
+      </select>
+    </div>
+
+    <input type="hidden" name="_subject" value="New PI Metairie Lead" />
+    <input type="hidden" name="_next" value="https://privateinvestigatormetairie.com/thank-you" />
+
+    <button
+      type="submit"
+      class="w-full py-4 px-8 font-bold text-lg text-white transition-all"
+      style="background: var(--accent); border-radius: var(--radius); border: none; cursor: pointer;"
+      onmouseover="this.style.background='var(--accent-hover)'"
+      onmouseout="this.style.background='var(--accent)'"
+    >
+      Request Free Consultation
+    </button>
+
+    <p class="text-xs text-center text-gray-400 mt-2">
+      🔒 Your information is 100% confidential. We never share your data.
+    </p>
+  </form>
+
+  <div id="form-success" class="hidden text-center py-10">
+    <div class="text-5xl mb-4">✓</div>
+    <h3 class="text-2xl font-bold mb-2" style="color: var(--primary);">Thank You!</h3>
+    <p class="text-gray-600">Your inquiry has been received. A licensed investigator will be in touch within 1 business hour. For urgent matters, call directly at <a href="tel:+15048333716" style="color: var(--accent);">(504) 833-3716</a>.</p>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('lead-form') as HTMLFormElement | null;
+  const success = document.getElementById('form-success');
+  if (form && success) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          form.classList.add('hidden');
+          success.classList.remove('hidden');
+        } else {
+          alert('There was an error submitting the form. Please call us directly at (504) 833-3716.');
+        }
+      } catch {
+        alert('There was an error submitting the form. Please call us directly at (504) 833-3716.');
+      }
+    });
+  }
+</script>
